@@ -16,7 +16,6 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-
 # OhMyZsh ==============================================================================================================
 
 zinit snippet OMZP::sudo
@@ -59,13 +58,17 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
 zstyle ':fzf-tab:complete:code:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
 
 # Aliases ==============================================================================================================
 
 source ~/.alias/alias.zsh
 
+alias c='clear'
 alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
 
 # Shell integrations ===================================================================================================
