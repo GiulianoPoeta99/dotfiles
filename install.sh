@@ -20,11 +20,7 @@ sh <(curl -L https://nixos.org/nix/install) --daemon
 echo "Ingrese el directorio para repositorios:"
 read REPOS_DIR
 
-echo "Ingrese el directorio para código:"
-read CODE_DIR
-
 mkdir -p "$REPOS_DIR"
-mkdir -p "$CODE_DIR"
 
 # Instalamos y configuramos git ========================================================================================
 if [[ "$DISTRO" == "arch" ]]; then
@@ -53,18 +49,10 @@ elif [[ "$DISTRO" == "ubuntu" ]]; then
     sudo apt install -y zsh
 fi
 
-cd "$CODE_DIR"
-mkdir -p "$CODE_DIR/projects" && cd "$CODE_DIR/projects"
-git clone https://github.com/GiulianoPoeta99/dotfiles.git
-cd ./dotfiles && git submodule init && git submodule update
-cd zsh && git checkout main 
-cd ../qtile && git checkout main 
-cd ../kitty && git checkout main 
-
 cd
+git clone https://github.com/GiulianoPoeta99/dotfiles.git
 
 sudo rm /etc/zsh/zshenv
-sudo ln -s /home/$USER/$CODE_DIR/projects/dotfiles/zsh/dotfiles/zshenv /etc/zsh/zshenv
 mkdir .config/zsh/
 ln -s /home/$USER/$CODE_DIR/projects/dotfiles/zsh/dotfiles/.zshrc ~/.config/zsh/.zshrc
 ln -s /home/$USER/$CODE_DIR/projects/dotfiles/zsh/dotfiles/alias ~/.config/zsh/

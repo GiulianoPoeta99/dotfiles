@@ -1,0 +1,15 @@
+export ZDOTDIR="$HOME"/.config/zsh 
+
+export PATH="$PATH:/home/gpoeta/.local/bin"
+
+# config XDG
+# exportamos variables de entorno para el XDG estandar
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+
+# exportamos varibles nuevas de los dotfiles
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+# a partir de ahora solo se exportaran sin orden aca

@@ -41,7 +41,7 @@ bindkey '^[[1;5C' forward-word
 # History ==============================================================================================================
 
 HISTSIZE=5000
-HISTFILE=~/.zsh_history
+HISTFILE="$XDG_STATE_HOME"/zsh/history
 SAVEHIST=5000
 HISTDUP=erase
 setopt appendhistory
@@ -66,7 +66,7 @@ zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
 
 # Aliases ==============================================================================================================
 
-source ~/.alias/alias.zsh
+source ~/.config/zsh/alias/alias.zsh
 
 alias c='clear'
 alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
