@@ -95,12 +95,13 @@ cd
 
 
 # Instalamos nvim y lazyvim ============================================================================================
-# if [[ "$DISTRO" == "arch" ]]; then
-#     sudo pacman -S --noconfirm neovim lazygit ripgrep fd
-# elif [[ "$DISTRO" == "ubuntu" ]]; then
-#     sudo apt install -y neovim ripgrep fd-find
-#     nix-env -iA nixpkgs.lazygit
-# fi
+
+if [[ "$DISTRO" == "arch" ]]; then
+    sudo pacman -S --noconfirm neovim lazygit ripgrep fd
+elif [[ "$DISTRO" == "ubuntu" ]]; then
+    sudo apt install -y neovim ripgrep fd-find python3.12-venv
+    nix-env -iA nixpkgs.lazygit
+fi
 
 # mv ~/.config/nvim{,.bak}
 # mv ~/.local/share/nvim{,.bak}
