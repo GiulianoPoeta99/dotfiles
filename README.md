@@ -2,7 +2,28 @@
 
 ## Dependencias
 
+### Obligatorias
+
+- git
 - stow
+
+### Opcionales
+
+- zsh
+    - zoxide
+    - eza
+    - docker
+    - docker compose
+    - lazydocker
+    - xclip
+    - batcat
+    - fzf
+    - FiraCode Nerd Font
+
+- neovim
+    - lua
+
+
 
 ## Uso
 Descargamos el repo en el $HOME entramos al mismo y hacemos el comando `stow <app>`
@@ -14,10 +35,12 @@ Si queres agregar algun archivo al ignore de stow hay que agrear el archivo .sto
 Para instalar zsh hay que hacer lo siguiente.
 
 ```bash
-sudo stow -t / zsh/etc
+cd zsh
+sudo stow -t /etc etc
+cd ..
 stow zsh
+rm ../etc
 ```
-
 
 ### Neovim
 

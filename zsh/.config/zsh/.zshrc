@@ -59,10 +59,10 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
-zstyle ':fzf-tab:complete:code:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
-zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
-zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
-zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.alias/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:code:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
 # Aliases ==============================================================================================================
 
