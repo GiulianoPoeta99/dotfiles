@@ -1,16 +1,6 @@
 -- setup theme
 return {
 	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				options = {
-					theme = "catppuccin",
-				},
-			})
-		end,
-	},
-	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
@@ -23,6 +13,17 @@ return {
 		lazy = false,
 		priority = 1000,
 		dependencies = { "rktjmp/lush.nvim" },
+		-- config = function()
+		-- 	vim.cmd.colorscheme("bluloco-dark")
+		-- end,
+	},
+	{
+		"Mofiqul/dracula.nvim",
+		lazy = false,
+		priority = 1000,
+		-- config = function()
+		-- 	vim.cmd.colorscheme("dracula")
+		-- end,
 	},
 	{
 		"zaldih/themery.nvim",
@@ -52,6 +53,14 @@ return {
 					{
 						name = "Bluloco light",
 						colorscheme = "bluloco-light",
+					},
+					{
+						name = "Dracula",
+						colorscheme = "dracula",
+					},
+					{
+						name = "Dracula Soft",
+						colorscheme = "dracula-soft",
 					},
 				},
 			})
