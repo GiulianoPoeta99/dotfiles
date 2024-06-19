@@ -117,37 +117,37 @@ return {
 			action = wezterm.action({ SelectTextAtMouseCursor = "Line" }),
 		},
 
-		-- Selección de texto y copia al portapapeles
-		{
-		  event = {Up = {streak = 1, button = "Left"}},
-		  mods = "NONE",
-		  action = wezterm.action{CompleteSelection = "Clipboard"},
-		},
-		-- Selección de texto y copia al portapapeles primario (X11/Linux)
-		{
-		  event = {Up = {streak = 1, button = "Right"}},
-		  mods = "NONE",
-		  action = wezterm.action{CompleteSelection = "PrimarySelection"},
-		},
-		-- Selección de texto y copia al portapapeles y al portapapeles primario
-		{
-		  event = {Up = {streak = 1, button = "Middle"}},
-		  mods = "NONE",
-		  action = wezterm.action{CompleteSelection = "ClipboardAndPrimarySelection"},
-		},
-		-- Pegar desde el portapapeles
-		{
-		  event = {Down = {streak = 1, button = "Middle"}},
-		  mods = "NONE",
-		  action = wezterm.action{PasteFrom = "Clipboard"},
-		},
+		-- -- Selección de texto y copia al portapapeles
+		-- {
+		--   event = {Up = {streak = 1, button = "Left"}},
+		--   mods = "NONE",
+		--   action = wezterm.action{CompleteSelection = "Clipboard"},
+		-- },
+		-- -- Selección de texto y copia al portapapeles primario (X11/Linux)
+		-- {
+		--   event = {Up = {streak = 1, button = "Right"}},
+		--   mods = "NONE",
+		--   action = wezterm.action{CompleteSelection = "PrimarySelection"},
+		-- },
+		-- -- Selección de texto y copia al portapapeles y al portapapeles primario
+		-- {
+		--   event = {Up = {streak = 1, button = "Middle"}},
+		--   mods = "NONE",
+		--   action = wezterm.action{CompleteSelection = "ClipboardAndPrimarySelection"},
+		-- },
+		-- -- Pegar desde el portapapeles
+		-- {
+		--   event = {Down = {streak = 1, button = "Middle"}},
+		--   mods = "NONE",
+		--   action = wezterm.action{PasteFrom = "Clipboard"},
+		-- },
 
-		-- Pegar desde el portapapeles
-		{
-			event = { Down = { streak = 1, button = "Middle" } },
-			mods = "NONE",
-			action = wezterm.action({ PasteFrom = "Clipboard" }),
-		},
+		-- -- Pegar desde el portapapeles
+		-- {
+		-- 	event = { Down = { streak = 1, button = "Middle" } },
+		-- 	mods = "NONE",
+		-- 	action = wezterm.action({ PasteFrom = "Clipboard" }),
+		-- },
 
 		-- Mover el cursor del mouse
 		{
