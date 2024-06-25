@@ -88,3 +88,4 @@ export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
 # Prompt ===============================================================================================================
 
 eval "$(starship init zsh)"
+fpath+=${ZDOTDIR:-~}/.zsh_functions
