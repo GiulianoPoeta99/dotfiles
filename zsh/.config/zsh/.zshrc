@@ -65,6 +65,7 @@ zstyle ':fzf-tab:complete:code:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:rm:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
 # Aliases ==============================================================================================================
 
