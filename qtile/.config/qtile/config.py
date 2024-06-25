@@ -255,7 +255,7 @@ def def_widgets(i):
 
 def default_screen(monitor: str) -> Screen:
     return Screen(
-        wallpaper='~/.config/qtile/wallpaper.jpg',
+        wallpaper='~/.config/qtile/modules/wallpapers/wallpaper.jpg',
         wallpaper_mode='fill',
         top=bar.Bar(
             def_widgets(monitor),
