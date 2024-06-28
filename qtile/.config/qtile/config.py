@@ -5,15 +5,20 @@ from libqtile.config import Match, Key, Group, Click, Drag, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-from modules.themes.bluloco import bluloco
-from modules.subprocess import count_screens
+from modules.themes.catpuccin import mocha
+from modules.subprocess import count_screens, get_distro_icon
 
 #! Constantes ==========================================================================================================
-COLORS = bluloco()
+# sistema
+NUM_SCREENS = count_screens()
+NUM_GROUPS = 9
+
+# estetica
+COLORS = mocha()
 FONT="FiraCode Nerd Font Mono"
 FONT_SIZE=13
 
-# lazy objects
+# lazy objects de qtile
 LAZY = lazy
 LAYOUT = lazy.layout
 WINDOW = lazy.window
@@ -28,24 +33,25 @@ SHIFT = "shift" # alt
 
 # Combinaciones
 LEADER = [MOD] # acciones principales
+ALT_LEADER = [MOD, ALT] # acciones principales inversas
+ORDER = [MOD, CONTROL] # ordenar tiles 
+SIZE = [MOD, SHIFT] # modificar tiles
+ALT_SIZE = [MOD, ALT, SHIFT] # modificar tiles inversas
 
-ALT_PRIMARY = [MOD, ALT]
-ORDER       = [MOD, CONTROL]             # ordenar tiles 
 ALT_ORDER   = [MOD, ALT, CONTROL]        # ordenar tiles alternativo
-MODIFY      = [MOD, SHIFT]               # modificar tiles
-ALT_MODIFY  = [MOD, ALT, SHIFT] 
 SYSTEM      = [MOD, CONTROL, SHIFT] 
 ALT_SYSTEM  = [MOD, ALT, CONTROL, SHIFT] # acciones del sistema alternativo (sensibles)
 
+# por si quiero cambiar al modo vi
 LEFT = "Left"
 RIGHT = "Right"
 DOWN = "Down"
 UP = "Up"
 
+# apps
 TERMINAL = guess_terminal()
 BROWSER = "brave"
 EXPLORER = "nautilus"
-STORE = "gnome-software"
 EDITOR = "code"
 DB = "dbeaver"
 
@@ -83,14 +89,13 @@ keys = [
     # esto se puede mejorar con keychords, modes y chains
     # https://docs.qtile.org/en/stable/manual/config/keys.html
     #* Aplicaciones 
-    Key(LEADER,"Return", LAZY.spawn(TERMINAL), desc="Launch terminal"), # TODO: cambiar a t
-    Key(LEADER,"b", LAZY.spawn(BROWSER), desc="Launch browser"),
-    Key(LEADER,"f", LAZY.spawn(EXPLORER), desc="Launch File explorer"),
-    Key(LEADER,"s", LAZY.spawn(STORE), desc="Launch App store"),
-    Key(LEADER,"t", LAZY.spawn(EDITOR), desc="Launch Text editor"), # TODO: cambiar a c
-    Key(LEADER,"d", LAZY.spawn(DB), desc="Launch Database manager"),
-    Key(LEADER,"r", LAZY.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key(LEADER,"q", WINDOW.kill(), desc="Kill focused window"), 
+    Key(LEADER, "t", LAZY.spawn(TERMINAL), desc="Launch terminal"),
+    Key(LEADER, "i", LAZY.spawn(BROWSER), desc="Launch browser"),
+    Key(LEADER, "f", LAZY.spawn(EXPLORER), desc="Launch File explorer"),
+    Key(LEADER, "c", LAZY.spawn(EDITOR), desc="Launch Text editor"),
+    Key(LEADER, "d", LAZY.spawn(DB), desc="Launch Database manager"),
+    Key(LEADER, "e", LAZY.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(LEADER, "q", WINDOW.kill(), desc="Kill focused window"), 
     #* Movilidad 
     Key(LEADER, LEFT, LAYOUT.left(), desc="Move focus to left"), 
     Key(LEADER, RIGHT, LAYOUT.right(), desc="Move focus to right"),
@@ -99,20 +104,20 @@ keys = [
     # Key(LEADER, "space", LAYOUT.next(), desc="Move window focus to other window"),
     #* pantallas
     Key(LEADER,     "space",   LAZY.next_screen(),         desc="Move window focus to the next screen"),
-    Key(ALT_PRIMARY, "space",  LAZY.prev_screen(),         desc="Move window focus to the previus screen"),
+    Key(ALT_LEADER, "space",  LAZY.prev_screen(),         desc="Move window focus to the previus screen"),
     #* grupos 
-    Key(ALT_PRIMARY, LEFT,     SCREEN.prev_group(),        desc="Move focus to left group"), 
-    Key(ALT_PRIMARY, RIGHT,    SCREEN.next_group(),        desc="Move focus to right group"),
-    Key(ALT_PRIMARY, DOWN,     GROUP.prev_window(),        desc="Switch focus to previous window in group"),
-    Key(ALT_PRIMARY, UP,       GROUP.next_window(),        desc="Switch focus to next window in group"),
+    Key(ALT_LEADER, LEFT,     SCREEN.prev_group(),        desc="Move focus to left group"), 
+    Key(ALT_LEADER, RIGHT,    SCREEN.next_group(),        desc="Move focus to right group"),
+    Key(ALT_LEADER, DOWN,     GROUP.prev_window(),        desc="Switch focus to previous window in group"),
+    Key(ALT_LEADER, UP,       GROUP.next_window(),        desc="Switch focus to next window in group"),
     #* Redimensionar 
-    Key(MODIFY,      LEFT,     LAYOUT.grow_left(),         desc="Grow window to the left"), 
-    Key(MODIFY,      RIGHT,    LAYOUT.grow_right(),        desc="Grow window to the right"),
-    Key(MODIFY,      DOWN,     LAYOUT.grow_down(),         desc="Grow window down"),
-    Key(MODIFY,      UP,       LAYOUT.grow_up(),           desc="Grow window up"),
-    Key(MODIFY,      "space",  LAYOUT.increase_ratio(),    desc="Increase the space for master window"),
-    Key(ALT_MODIFY,  "space",  LAYOUT.decrease_ratio(),    desc="Decrease the space for master window"),
-    Key(MODIFY,      "r",      LAYOUT.normalize(),         desc="Reset all window sizes"),
+    Key(SIZE,      LEFT,     LAYOUT.grow_left(),         desc="Grow window to the left"), 
+    Key(SIZE,      RIGHT,    LAYOUT.grow_right(),        desc="Grow window to the right"),
+    Key(SIZE,      DOWN,     LAYOUT.grow_down(),         desc="Grow window down"),
+    Key(ALT_SIZE,  "space",  LAYOUT.decrease_ratio(),    desc="Decrease the space for master window"),
+    Key(SIZE,      UP,       LAYOUT.grow_up(),           desc="Grow window up"),
+    Key(SIZE,      "space",  LAYOUT.increase_ratio(),    desc="Increase the space for master window"),
+    Key(SIZE,      "r",      LAYOUT.normalize(),         desc="Reset all window sizes"),
     #* Acomodar 
     Key(ORDER, LEFT, LAYOUT.shuffle_left(), desc="Move window to the left"), 
     Key(ORDER, RIGHT, LAYOUT.shuffle_right(), desc="Move window to the right"),
@@ -143,74 +148,22 @@ mouse = [
     Click(LEADER, "Button2", WINDOW.bring_to_front()),
 ]
 
+#! aca se definen los layouts y sus configs ============================================================================
+
+layouts = [
+    layout.Bsp(),
+    layout.Max(),
+    layout.MonadThreeCol(),
+]
+
 #! aca se definen los grupos y sus binds ===============================================================================
-group_data = {
-    '1': {'layout': 'treetab', 'label': ''},
-    '2': {'layout': 'monadtall', 'label': '󰙯'},
-    '3': {'layout': 'monadtall', 'label': ''},
-    '4': {'layout': 'monadtall', 'label': '󰆼'},
-    '5': {'layout': 'monadtall', 'label': ''},
-    '6': {'layout': 'monadtall', 'label': '1'},
-    '7': {'layout': 'monadtall', 'label': '2'},
-    '8': {'layout': 'monadtall', 'label': '3'},
-    '9': {'layout': 'monadtall', 'label': '4'},
-    '0': {'layout': 'max', 'label': ''}
-}
 groups = []
-for name, data in group_data.items():
-    groups.append(Group(name=name, layout=data['layout'], label=name))
+for name in '12345':
+    groups.append(Group(name=name, label=name))
     keys.extend([
         Key(LEADER, name, GROUP[name].toscreen(), desc=f"Switch to group {name}"),
         Key(ORDER, name, WINDOW.togroup(name, switch_group=False), desc=f"Switch to & move focused window to group {name}"),
     ])
-
-#! aca se definen los layouts y sus configs ============================================================================
-
-global_config = {
-    'border_focus': '#D84610', # Border colour(s) for the focused window.
-    'border_normal': '#000000', # Border colour(s) for un-focused windows.
-    'border_width': 2, # Border width.
-    'margin': 8, # Margin of the layout
-}
-
-layouts = [
-    layout.MonadTall( # sirve buena mov 
-        single_border_width = 2, # Border width for single window
-        single_margin = 8, # Margin size for single window
-        **global_config #* si paso esto como kwargs me ahorro espacio
-    ),
-    layout.TreeTab( # SUPER GOD
-        active_bg = '#000080', # Background color of active tab
-        active_fg = '#ffffff', # Foreground color of active tab
-        inactive_bg = '#606060', # Background color of inactive tab
-        inactive_fg = '#ffffff', # Foreground color of inactive tab
-        urgent_bg = '#ff0000', # Background color of urgent tab
-        urgent_fg = '#ffffff', # Foreground color of urgent tab
-        bg_color = '#000000', # Background color of tabs
-        section_fg = 'ffffff', # Color of section label
-        border_width = 2, # Width of the border
-        font = FONT, # Font
-        fontsize = FONT_SIZE, # Font pixel size.
-        padding_left = 8, # Left padding for tabs
-        padding_x = 8, # Left padding for tab label
-        padding_y = 6, # Top padding for tab label
-        vspace = 1, # Space between tabs
-        level_shift = 8, # Shift for children tabs
-        sections = ["Tabs"], # Titles of section instances
-        section_fontsize = 10, # Font pixel size of section label
-        section_top = 8, # Top margin of section label
-        section_bottom = 8, # Bottom margin of section
-        previous_on_rm = True, # Focus previous window on close instead of first.
-        panel_width = 190, # Width of the left panel
-    ),
-    layout.Bsp(),
-    layout.Columns(),
-    layout.Matrix(),
-    layout.Max(),
-    layout.MonadThreeCol(),
-    layout.MonadWide(),
-    layout.RatioTile()
-]
 
 #! definimos un estandar para los widgets ==============================================================================
 widget_defaults = dict(
@@ -220,11 +173,15 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-def def_widgets(i):
+def def_widgets(monitor: int, error: str):
     return [
-        widget.TextBox(str(i)),
+        widget.TextBox(get_distro_icon()),
+        widget.Sep(),
+        widget.TextBox(f"󰍹 {str(monitor+1)}{error}"),
         widget.Sep(),
         widget.GroupBox(),
+        widget.Sep(),
+        widget.AGroupBox(),
         widget.Sep(),
         widget.WindowName(),
         widget.Prompt(),
@@ -236,13 +193,21 @@ def def_widgets(i):
         ),
         widget.Sep(),
         widget.CurrentLayout(),
+        widget.CurrentLayoutIcon(),
         widget.Sep(),    
         # widget.StatusNotifier(),
         # widget.Systray(), #! no funciona en ambos (solo muestra el idioma, es raro)
-        widget.Clock(format="%d/%m/%Y %H:%M:%S"), # DD/MM/YYYY hh:mm:ss
+        widget.Clock(format="%d.%m.%Y %H:%M:%S"), # DD/MM/YYYY hh:mm:ss
         widget.Sep(),
-        # widget.Backlight(), #TODO: hay que hacerlo andar
-        # widget.Sep(),
+        widget.Battery(format='󱊣 {percent:2.0%}'),
+        widget.Sep(),
+        widget.Backlight(
+            backlight_name="intel_backlight",
+            brightness_file="/sys/class/backlight/intel_backlight/brightness",
+            max_brightness_file="/sys/class/backlight/intel_backlight/max_brightness",
+            format='󰃟 {percent:2.0%}'
+        ),
+        widget.Sep(),
         widget.QuickExit(
             default_text='[]', 
             countdown_format='[{}]',
@@ -253,13 +218,19 @@ def def_widgets(i):
 
 #! definimos las pantallas y sus caracteristicas =======================================================================
 
-def default_screen(monitor: str) -> Screen:
+def default_screen(monitor: int, error: str) -> Screen:
     return Screen(
         wallpaper='~/.config/qtile/modules/wallpapers/wallpaper.jpg',
         wallpaper_mode='fill',
         top=bar.Bar(
-            def_widgets(monitor),
+            def_widgets(monitor, error),
             26,
+        ),
+        bottom=bar.Bar(
+            [
+                widget.CapsNumLockIndicator()
+            ],
+            14,
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -267,16 +238,17 @@ def default_screen(monitor: str) -> Screen:
         # x11_drag_polling_rate = 60,
     )
 
-num_screens = count_screens()
-if (num_screens > 0):
+
+if (NUM_SCREENS > 0):
     screens_list = []
-    for i in range(num_screens):
-        screens_list.append(default_screen(str(i+1)))
+    for i in range(NUM_SCREENS):
+        screens_list.append(default_screen(i, ''))
 else :
-    screens_list = [default_screen('ERROR')]
+    screens_list = [default_screen(1,'ERROR')]
 
 screens = screens_list
 
+#! otras config que hay que ver ========================================================================================
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -297,7 +269,7 @@ floating_layout = layout.Floating(
     ],
     border_focus = '#D84610', # Border colour(s) for the focused window.
     border_normal = '#000000', # Border colour(s) for un-focused windows.
-    border_width = 1, # Border width.
+    border_width = 2, # Border width.
     fullscreen_border_width = 0, # Border width for fullscreen.
     max_border_width = 0 # Border width for maximize.
 )
@@ -326,4 +298,4 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call(['sh', f'{home}/.config/qtile/autostart.sh'])
