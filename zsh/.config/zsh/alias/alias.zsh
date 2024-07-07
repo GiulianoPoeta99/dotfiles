@@ -40,9 +40,9 @@ fi
 
 # ********************************************************************************************************************************************************
 #
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/update.zsh # update
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/list.zsh # ls 
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/docker.zsh # docker
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/git.zsh # git
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/copy.zsh # copy
-source /mnt/sda1/code/projects/dotfiles/zsh/dotfiles/alias/gpt.zsh # gpt
+source ~/.config/zsh/alias/update.zsh # update
+source ~/.config/zsh/alias/list.zsh # ls 
+source ~/.config/zsh/alias/docker.zsh # docker
+source ~/.config/zsh/alias/git.zsh # git
+source ~/.config/zsh/alias/copy.zsh # copy
+source ~/.config/zsh/alias/gpt.zsh # gpt

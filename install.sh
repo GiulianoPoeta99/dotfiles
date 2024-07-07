@@ -1,4 +1,16 @@
 #!/bin/bash
+echo "Iniciamos instalación:"
+
+echo 'Antes de seguir con la primer pregunta recuerde que debe descargar FiraCode Nerd Font y dejar el comprimiedo en la carpeta de Descargas.'
+
+# Preguntamos si estamos en una instancia de WSL
+echo "¿Esta utilizando WSL? (S/N)"
+read WSL
+
+if ([["$WLS" != 'S' || "$WLS" != 's' || "$WLS" != 'N' || "$WLS" != 'n']]); then
+    echo "Elija una opción valida S/N"
+    read WSL
+fi
 
 # Elegimos una distro para hacer la instalación
 echo "Elija su distribución (arch/ubuntu):"
@@ -10,19 +22,9 @@ if [[ "$DISTRO" != "arch" && "$DISTRO" != "ubuntu" ]]; then
     exit 1
 fi
 
-# ######################################################################################################################
-# Para cualquier distro
-
-# Instalamos nix =======================================================================================================
-sh <(curl -L https://nixos.org/nix/install) --daemon
-
-# Creamos carpeta de repos de sistema centrales ========================================================================
-echo "Ingrese el directorio para repositorios:"
-read REPOS_DIR
-
-mkdir -p "$REPOS_DIR"
-
 # Instalamos y configuramos git ========================================================================================
+echo "* Configuración de GIT:"
+
 if [[ "$DISTRO" == "arch" ]]; then
     sudo pacman -S --noconfirm git
 elif [[ "$DISTRO" == "ubuntu" ]]; then
@@ -41,48 +43,120 @@ git config --global user.email "$GIT_EMAIL"
 git config --global core.editor "vim"
 git config --global credential.helper store
 git config --global color.status.changed yellow
+git config --global init.defaultBranch "main"
+
+# ######################################################################################################################
+# Para arch
+if [[ "$DISTRO" == "arch" ]]; then
+    # Actualizamos los repos y paquetes ================================================================================
+    sudo pacman -Syu
+
+    # Configuramos idioma de la maquina ================================================================================
+    echo "¿La máquina está configurada en inglés? (s/n):"
+    read MACHINE_LANG
+    if [[ "$MACHINE_LANG" == "n" ]]; then
+        sudo nano /etc/locale.gen
+        sudo locale-gen
+    fi
+
+    # Configuramos pacman ==============================================================================================
+    # TODO: hacer que lo copie al buffer y abrir vim o nano
+
+    echo "Agregue la siguiente configuración a /etc/pacman.conf:"
+    echo "# Misc options"
+    echo "#UseSyslog"
+    echo "Color"
+    echo "#NoProgressBar"
+    echo "CheckSpace"
+    echo "VerbosePkgLists"
+    echo "ParallelDownloads = 10"
+    echo "ILoveCandy"
+
+    read -p "Presione Enter para continuar después de editar pacman.conf"
+    sudo nano /etc/pacman.conf
+
+    # Instalamos AUR ===================================================================================================
+    cd && cd "$REPOS_DIR"
+    git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin
+    makepkg -si
+
+    # Instalamos repo de blackarch =====================================================================================
+    cd ..
+    mkdir blackarch && cd blackarch
+    curl -O https://blackarch.org/strap.sh
+    chmod +x strap.sh && sudo ./strap.sh
+
+    # Acutalizamos los repos nuevamente ================================================================================
+    sudo pacman -Syu && cd
+fi
+
+# ######################################################################################################################
+# Para cualquier distro
+echo "* Configuración de Nix:"
+
+if [[ "$DISTRO" == "arch" ]]; then
+    # Preguntamos si quiere usar Nix
+    echo "¿Quiere usar Nix? (S/N)"
+    read Nix
+elif [[ "$DISTRO" == "ubuntu" ]]; then
+    Nix="S"
+fi
+
+if ([["$Nix" != 'S' || "$Nix" != 's' || "$Nix" != 'N' || "$Nix" != 'n']]); then
+    echo "Elija una opción valida S/N"
+    read Nix
+elif ([["$Nix" == 'S' || "$Nix" == 's']]); then
+    # Instalamos nix ===================================================================================================
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+fi
+
+# Creamos carpeta de repos de sistema centrales ========================================================================
+echo "Ingrese el directorio para repositorios:"
+read REPOS_DIR
+
+mkdir -p "$REPOS_DIR"
 
 # Instalamos zsh =======================================================================================================
+echo "* Configuración de ZSH:"
+
 if [[ "$DISTRO" == "arch" ]]; then
-    sudo pacman -S --noconfirm zsh
+    sudo pacman -S --noconfirm zsh fzf zoxide
 elif [[ "$DISTRO" == "ubuntu" ]]; then
     sudo apt install -y zsh
 fi
 
 cd
+echo "Esta configuración utiliza stow GNU para manejar los dotfiles."
 git clone https://github.com/GiulianoPoeta99/dotfiles.git
 
 sudo rm /etc/zsh/zshenv
-mkdir .config/zsh/
-ln -s /home/$USER/$CODE_DIR/projects/dotfiles/zsh/dotfiles/.zshrc ~/.config/zsh/.zshrc
-ln -s /home/$USER/$CODE_DIR/projects/dotfiles/zsh/dotfiles/alias ~/.config/zsh/
-mkdir -p .local/state/zsh
 
-mkdir -p "$REPOS_DIR/zsh"
-cd "$REPOS_DIR/zsh"
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-git clone https://github.com/zsh-users/zsh-autosuggestions
-git clone https://github.com/ohmyzsh/ohmyzsh.git # instalamos paquetes varios
+cd ~/dotfiles/zsh
+sudo stow -t /etc etc
+cd ..
+stow zsh
 
 curl -sS https://starship.rs/install.sh | sh
 
-cd && mkdir -p .local/share/fonts/nerd-fonts 
-
-cp ~/Downloads/FiraCode.zip .
-
-unzip FiraCode.zip && rm FiraCode.zip
-
-fc-match FiraCodeNerdFont -a
+if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
+    cd && mkdir -p .local/share/fonts/nerd-fonts 
+    cp ~/Downloads/FiraCode.zip .
+    unzip FiraCode.zip && rm FiraCode.zip
+    fc-match FiraCodeNerdFont -a
+if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
 
 chsh -s $(which zsh)
 
 cd
 
-# # Instalamos wezterm =================================================================================================
+# Instalamos wezterm ===================================================================================================
 
+if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
+    echo "* Configuración de Wezterm:"
+fi
 
 # Instalamos nvim y lazyvim ============================================================================================
+echo "* Configuración de NeoVim y LazyVim:"
 
 if [[ "$DISTRO" == "arch" ]]; then
     sudo pacman -S --noconfirm neovim lazygit ripgrep fd
@@ -102,6 +176,9 @@ fi
 
 # Instalamos awesome wm ================================================================================================
 
+if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
+    echo "Configuración de AwesomeWM"
+fi
 
 # Instalamos paquetes varios ===========================================================================================
 if [[ "$DISTRO" == "arch" ]]; then
@@ -110,7 +187,7 @@ if [[ "$DISTRO" == "arch" ]]; then
         man-pages docker docker-compose python-pip flatpak podman go php composer \
         jdk22-openjdk lua luarocks
     # instalamos paquetes varios de AUR ================================================================================
-    paru -S --noconfirm xdg-ninja lazydocker
+    paru -S --noconfirm lazydocker
 
     # instalamos paquetes varios de flatpak ============================================================================
     sudo flatpak install flathub com.brave.Browser
@@ -170,48 +247,3 @@ rustup update
 # instalamos nvm y npm =================================================================================================
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 nvm install 22
-
-# ######################################################################################################################
-# Para arch
-if [[ "$DISTRO" == "arch" ]]; then
-    # Actualizamos los repos y paquetes ================================================================================
-    sudo pacman -Syu
-
-    # Configuramos idioma de la maquina ================================================================================
-    echo "¿La máquina está configurada en inglés? (s/n):"
-    read MACHINE_LANG
-    if [[ "$MACHINE_LANG" == "n" ]]; then
-        sudo nano /etc/locale.gen
-        sudo locale-gen
-    fi
-
-    # Configuramos pacman ==============================================================================================
-    # TODO: hacer que lo copie al buffer y abrir vim o nano
-
-    echo "Agregue la siguiente configuración a /etc/pacman.conf:"
-    echo "# Misc options"
-    echo "#UseSyslog"
-    echo "Color"
-    echo "#NoProgressBar"
-    echo "CheckSpace"
-    echo "VerbosePkgLists"
-    echo "ParallelDownloads = 10"
-    echo "ILoveCandy"
-
-    read -p "Presione Enter para continuar después de editar pacman.conf"
-    sudo nano /etc/pacman.conf
-
-    # Instalamos AUR ===================================================================================================
-    cd && cd "$REPOS_DIR"
-    git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin
-    makepkg -si
-
-    # Instalamos repo de blackarch =====================================================================================
-    cd ..
-    mkdir blackarch && cd blackarch
-    curl -O https://blackarch.org/strap.sh
-    chmod +x strap.sh && sudo ./strap.sh
-
-    # Acutalizamos los repos nuevamente ================================================================================
-    sudo pacman -Syu && cd
-fi
