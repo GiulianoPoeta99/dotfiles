@@ -17,7 +17,7 @@ alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 
 # paru = yay
 alias yay='paru'
 
-cdup() {
+..() {
   local count=${1:-1}
   local dots=""
   

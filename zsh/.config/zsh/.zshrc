@@ -75,6 +75,8 @@ alias c='clear'
 alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
 
 # Shell integrations ===================================================================================================
+fpath+=${ZDOTDIR:-~}/.zsh_functions
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval "$(fzf --zsh)"
 
@@ -89,4 +91,3 @@ export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
 # Prompt ===============================================================================================================
 
 eval "$(starship init zsh)"
-fpath+=${ZDOTDIR:-~}/.zsh_functions
