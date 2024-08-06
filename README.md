@@ -19,6 +19,7 @@
     - batcat
     - fzf
     - FiraCode Nerd Font
+    - lynis
 
 - neovim
     - lua

@@ -74,19 +74,30 @@ source ~/.config/zsh/alias/alias.zsh
 alias c='clear'
 alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
 
+# Path ==============================================================================================================
+
+export PATH="/usr/bin/flutter/bin:$PATH"
+
 # Shell integrations ===================================================================================================
+
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "/home/$USER/.local/share/cargo/env"
+export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
+
+# para usar brave con flutter
+export CHROME_EXECUTABLE="brave"
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval "$(fzf --zsh)"
 
 eval "$(zoxide init --cmd cd zsh)"
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/$USER/.local/share/cargo/env"
-export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
+# eval "$(zellij setup --generate-auto-start zsh)"
+
 
 # Prompt ===============================================================================================================
 
