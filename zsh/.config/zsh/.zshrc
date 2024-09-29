@@ -84,13 +84,10 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/$USER/.local/share/cargo/env"
 export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
 
 # para usar brave con flutter
 export CHROME_EXECUTABLE="brave"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval "$(fzf --zsh)"
 

@@ -1,249 +1,265 @@
 #!/bin/bash
-echo "Iniciamos instalación:"
 
-echo 'Antes de seguir con la primer pregunta recuerde que debe descargar FiraCode Nerd Font y dejar el comprimiedo en la carpeta de Descargas.'
+set -e
 
-# Preguntamos si estamos en una instancia de WSL
-echo "¿Esta utilizando WSL? (S/N)"
-read WSL
+# Global variables
+REPOS_DIR=""
+GIT_NAME=""
+GIT_EMAIL=""
+DISTRO=""
+WSL=""
+NIX=""
 
-if ([["$WLS" != 'S' || "$WLS" != 's' || "$WLS" != 'N' || "$WLS" != 'n']]); then
-    echo "Elija una opción valida S/N"
-    read WSL
-fi
+# Function to print colored output
+print_colored() {
+    local color=$1
+    local message=$2
+    case $color in
+        "red") echo -e "\e[31m$message\e[0m" ;;
+        "green") echo -e "\e[32m$message\e[0m" ;;
+        "yellow") echo -e "\e[33m$message\e[0m" ;;
+        "blue") echo -e "\e[34m$message\e[0m" ;;
+        *) echo "$message" ;;
+    esac
+}
 
-# Elegimos una distro para hacer la instalación
-echo "Elija su distribución (arch/ubuntu):"
-read DISTRO
+# Function to get user input with validation
+get_input() {
+    local prompt=$1
+    local valid_options=$2
+    local response
 
-# Verificamos que se haya ingresado una distro válida
-if [[ "$DISTRO" != "arch" && "$DISTRO" != "ubuntu" ]]; then
-    echo "Distribución no válida. Debe ser 'arch' o 'ubuntu'."
-    exit 1
-fi
+    while true; do
+        read -p "$prompt" response
+        if [[ -z "$valid_options" || "$response" =~ ^($valid_options)$ ]]; then
+            echo "$response"
+            return
+        fi
+        print_colored "red" "Invalid input. Please try again."
+    done
+}
 
-# Instalamos y configuramos git ========================================================================================
-echo "* Configuración de GIT:"
+# Function to check if command exists
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
 
-if [[ "$DISTRO" == "arch" ]]; then
-    sudo pacman -S --noconfirm git
-elif [[ "$DISTRO" == "ubuntu" ]]; then
-    sudo apt update
-    sudo apt install -y git
-fi
+# Initialize script
+init_script() {
+    print_colored "blue" "Starting installation..."
+    print_colored "yellow" "Remember to download FiraCode Nerd Font and place the compressed file in the Downloads folder."
 
-echo "Ingrese su nombre de usuario de git:"
-read GIT_NAME
+    WSL=$(get_input "Are you using WSL? (Y/N): " "Y|N|y|n")
+    DISTRO=$(get_input "Choose your distribution (arch/ubuntu): " "arch|ubuntu")
+    REPOS_DIR=$(get_input "Enter the directory for repositories: ")
+    mkdir -p "$REPOS_DIR"
+}
 
-echo "Ingrese su email de git:"
-read GIT_EMAIL
+# Configure Git
+configure_git() {
+    print_colored "blue" "Configuring Git..."
+    if [[ "$DISTRO" == "arch" ]]; then
+        sudo pacman -S --noconfirm git
+    elif [[ "$DISTRO" == "ubuntu" ]]; then
+        sudo apt update && sudo apt install -y git
+    fi
 
-git config --global user.name "$GIT_NAME"
-git config --global user.email "$GIT_EMAIL"
-git config --global core.editor "vim"
-git config --global credential.helper store
-git config --global color.status.changed yellow
-git config --global init.defaultBranch "main"
+    GIT_NAME=$(get_input "Enter your Git username: ")
+    GIT_EMAIL=$(get_input "Enter your Git email: ")
 
-# ######################################################################################################################
-# Para arch
-if [[ "$DISTRO" == "arch" ]]; then
-    # Actualizamos los repos y paquetes ================================================================================
+    git config --global user.name "$GIT_NAME"
+    git config --global user.email "$GIT_EMAIL"
+    git config --global core.editor "vim"
+    git config --global credential.helper store
+    git config --global color.status.changed yellow
+    git config --global init.defaultBranch "main"
+}
+
+# Configure Nix
+configure_nix() {
+    print_colored "blue" "Configuring Nix..."
+    if [[ "$DISTRO" == "ubuntu" || $(get_input "Do you want to use Nix? (Y/N): " "Y|N|y|n") =~ ^[Yy]$ ]]; then
+        sh <(curl -L https://nixos.org/nix/install) --daemon
+    fi
+}
+
+# Configure Zsh
+configure_zsh() {
+    print_colored "blue" "Configuring Zsh..."
+    if [[ "$DISTRO" == "arch" ]]; then
+        sudo pacman -S --noconfirm zsh fzf zoxide
+    elif [[ "$DISTRO" == "ubuntu" ]]; then
+        sudo apt install -y zsh fzf
+    fi
+
+    git clone https://github.com/GiulianoPoeta99/dotfiles.git ~/dotfiles
+    sudo rm /etc/zsh/zshenv
+
+    (
+        cd ~/dotfiles/zsh
+        sudo stow -t /etc etc
+        cd ..
+        stow zsh
+    )
+
+    curl -sS https://starship.rs/install.sh | sh
+
+    if [[ "$WSL" =~ ^[Nn]$ ]]; then
+        mkdir -p ~/.local/share/fonts/nerd-fonts
+        cp ~/Downloads/FiraCode.zip ~
+        unzip FiraCode.zip && rm FiraCode.zip
+        fc-match FiraCodeNerdFont -a
+    fi
+
+    chsh -s $(which zsh)
+}
+
+# Arch-specific installation
+install_arch() {
+    print_colored "blue" "Starting Arch Linux installation..."
+
+    # Update system
     sudo pacman -Syu
 
-    # Configuramos idioma de la maquina ================================================================================
-    echo "¿La máquina está configurada en inglés? (s/n):"
-    read MACHINE_LANG
-    if [[ "$MACHINE_LANG" == "n" ]]; then
+    # Configure locale
+    local machine_lang=$(get_input "Is the machine configured in English? (Y/N): " "Y|N|y|n")
+    if [[ "$machine_lang" =~ ^[Nn]$ ]]; then
         sudo nano /etc/locale.gen
         sudo locale-gen
     fi
 
-    # Configuramos pacman ==============================================================================================
-    # TODO: hacer que lo copie al buffer y abrir vim o nano
+    # Configure pacman
+    print_colored "yellow" "Add the following configuration to /etc/pacman.conf:"
+    cat << EOF
+# Misc options
+#UseSyslog
+Color
+#NoProgressBar
+CheckSpace
+VerbosePkgLists
+ParallelDownloads = 10
+ILoveCandy
+EOF
 
-    echo "Agregue la siguiente configuración a /etc/pacman.conf:"
-    echo "# Misc options"
-    echo "#UseSyslog"
-    echo "Color"
-    echo "#NoProgressBar"
-    echo "CheckSpace"
-    echo "VerbosePkgLists"
-    echo "ParallelDownloads = 10"
-    echo "ILoveCandy"
-
-    read -p "Presione Enter para continuar después de editar pacman.conf"
+    read -p "Press Enter to continue after editing pacman.conf"
     sudo nano /etc/pacman.conf
 
-    # Instalamos AUR ===================================================================================================
-    cd && cd "$REPOS_DIR"
-    git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin
-    makepkg -si
+    # Install AUR helper
+    (
+        cd "$REPOS_DIR"
+        git clone https://aur.archlinux.org/paru-bin.git
+        cd paru-bin
+        makepkg -si
+    )
 
-    # Instalamos repo de blackarch =====================================================================================
-    cd ..
-    mkdir blackarch && cd blackarch
-    curl -O https://blackarch.org/strap.sh
-    chmod +x strap.sh && sudo ./strap.sh
+    # Install BlackArch repository
+    (
+        cd "$REPOS_DIR"
+        mkdir blackarch && cd blackarch
+        curl -O https://blackarch.org/strap.sh
+        chmod +x strap.sh && sudo ./strap.sh
+    )
 
-    # Acutalizamos los repos nuevamente ================================================================================
-    sudo pacman -Syu && cd
-fi
-
-# ######################################################################################################################
-# Para cualquier distro
-echo "* Configuración de Nix:"
-
-if [[ "$DISTRO" == "arch" ]]; then
-    # Preguntamos si quiere usar Nix
-    echo "¿Quiere usar Nix? (S/N)"
-    read Nix
-elif [[ "$DISTRO" == "ubuntu" ]]; then
-    Nix="S"
-fi
-
-if ([["$Nix" != 'S' || "$Nix" != 's' || "$Nix" != 'N' || "$Nix" != 'n']]); then
-    echo "Elija una opción valida S/N"
-    read Nix
-elif ([["$Nix" == 'S' || "$Nix" == 's']]); then
-    # Instalamos nix ===================================================================================================
-    sh <(curl -L https://nixos.org/nix/install) --daemon
-fi
-
-# Creamos carpeta de repos de sistema centrales ========================================================================
-echo "Ingrese el directorio para repositorios:"
-read REPOS_DIR
-
-mkdir -p "$REPOS_DIR"
-
-# Instalamos zsh =======================================================================================================
-echo "* Configuración de ZSH:"
-
-if [[ "$DISTRO" == "arch" ]]; then
-    sudo pacman -S --noconfirm zsh fzf zoxide
-elif [[ "$DISTRO" == "ubuntu" ]]; then
-    sudo apt install -y zsh
-fi
-
-cd
-echo "Esta configuración utiliza stow GNU para manejar los dotfiles."
-git clone https://github.com/GiulianoPoeta99/dotfiles.git
-
-sudo rm /etc/zsh/zshenv
-
-cd ~/dotfiles/zsh
-sudo stow -t /etc etc
-cd ..
-stow zsh
-
-curl -sS https://starship.rs/install.sh | sh
-
-if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
-    cd && mkdir -p .local/share/fonts/nerd-fonts 
-    cp ~/Downloads/FiraCode.zip .
-    unzip FiraCode.zip && rm FiraCode.zip
-    fc-match FiraCodeNerdFont -a
-if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
-
-chsh -s $(which zsh)
-
-cd
-
-# Instalamos wezterm ===================================================================================================
-
-if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
-    echo "* Configuración de Wezterm:"
-fi
-
-# Instalamos nvim y lazyvim ============================================================================================
-echo "* Configuración de NeoVim y LazyVim:"
-
-if [[ "$DISTRO" == "arch" ]]; then
-    sudo pacman -S --noconfirm neovim lazygit ripgrep fd
-elif [[ "$DISTRO" == "ubuntu" ]]; then
-    sudo apt install -y neovim ripgrep fd-find python3.12-venv
-    nix-env -iA nixpkgs.lazygit
-fi
-
-# mv ~/.config/nvim{,.bak}
-# mv ~/.local/share/nvim{,.bak}
-# mv ~/.local/state/nvim{,.bak}
-# mv ~/.cache/nvim{,.bak}
-
-# git clone https://github.com/LazyVim/starter ~/.config/nvim
-
-# rm -rf ~/.config/nvim/.git
-
-# Instalamos awesome wm ================================================================================================
-
-if ([["$WSL" == 'N' || "$WSL" == 'n']]); then
-    echo "Configuración de AwesomeWM"
-fi
-
-# Instalamos paquetes varios ===========================================================================================
-if [[ "$DISTRO" == "arch" ]]; then
-    # instalamos paquetes varios de pacman =============================================================================
-    sudo pacman -S --noconfirm fzf xclip bash-completion eza bat glow man-db \
-        man-pages docker docker-compose python-pip flatpak podman go php composer \
-        jdk22-openjdk lua luarocks
-    # instalamos paquetes varios de AUR ================================================================================
+    # Install additional packages
+    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages docker docker-compose python-pip flatpak podman go php composer jdk22-openjdk lua luarocks
     paru -S --noconfirm lazydocker
 
-    # instalamos paquetes varios de flatpak ============================================================================
-    sudo flatpak install flathub com.brave.Browser
-    sudo flatpak install flathub com.slack.Slack
-    sudo flatpak install flathub md.obsidian.Obsidian
-elif [[ "$DISTRO" == "ubuntu" ]]; then
+    # Install Flatpak applications
+    sudo flatpak install flathub com.brave.Browser com.slack.Slack md.obsidian.Obsidian
+
+    configure_neovim
+}
+
+# Ubuntu-specific installation
+install_ubuntu() {
+    print_colored "blue" "Starting Ubuntu installation..."
+
+    # Update system
+    sudo apt update && sudo apt upgrade -y
+
+    # Install additional repositories
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
-    sudo apt update
 
-    # preparamos instalación de docker =================================================================================
-    sudo apt-get update
-    sudo apt-get install ca-certificates curl
+    # Docker installation
+    sudo apt-get install -y ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
-    echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install 
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-    # instalamos paquetes varios de apt ================================================================================
-    sudo apt install -y xclip bash-completion eza bat glow man-db \
-        docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-        python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 luarocks
+    sudo apt update
 
-    # instalamos paquetes varios de nix ================================================================================
-    nix-env -iA nixpkgs.lazydocker
-    nix-env -iA nixpkgs.xdg-ninja
-    nix-env -iA nixpkgs.fzf
+    # Install packages
+    sudo apt install -y neovim ripgrep fd-find python3.12-venv xclip bash-completion eza bat glow man-db docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 luarocks
 
-    # instalamos composer ==============================================================================================
-    cd ~
+    # Install Nix packages
+    nix-env -iA nixpkgs.lazygit nixpkgs.lazydocker nixpkgs.xdg-ninja nixpkgs.fzf
+
+    # Install Composer
     curl -sS https://getcomposer.org/installer -o composer-setup.php
-    HASH=`curl -sS https://composer.github.io/installer.sig`
-    echo $HASH
+    HASH=$(curl -sS https://composer.github.io/installer.sig)
     php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
     sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    rm composer-setup.php
 
-    # instalamos paquetes varios de snap ===============================================================================
-    sudo snap install brave
-    sudo snap install slack
-    sudo snap install obsidian --classic
-fi
+    # Install Snap applications
+    sudo snap install brave slack obsidian --classic
 
-# instalamos zoxide ====================================================================================================
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-echo 'eval "$(zoxide init --cmd cd bash)"' >> ~/.bashrc
+    configure_neovim
+}
 
-# instalamos rustup y rust =============================================================================================
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup update
+# Configure Neovim
+configure_neovim() {
+    # Uncomment these lines if you want to reset your Neovim configuration
+    # mv ~/.config/nvim{,.bak}
+    # mv ~/.local/share/nvim{,.bak}
+    # mv ~/.local/state/nvim{,.bak}
+    # mv ~/.cache/nvim{,.bak}
+    # git clone https://github.com/LazyVim/starter ~/.config/nvim
+    # rm -rf ~/.config/nvim/.git
+}
 
-# instalamos nvm y npm =================================================================================================
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-nvm install 22
+# Install development tools
+install_dev_tools() {
+    print_colored "blue" "Installing development tools..."
+
+    # Install zoxide
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+    echo 'eval "$(zoxide init --cmd cd bash)"' >> ~/.bashrc
+
+    # Install Rust
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source $HOME/.cargo/env
+    rustup update
+
+    # Install NVM and Node.js
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm install 22
+}
+
+# Main function
+main() {
+    init_script
+    configure_git
+    configure_nix
+    configure_zsh
+
+    if [[ "$DISTRO" == "arch" ]]; then
+        install_arch
+    elif [[ "$DISTRO" == "ubuntu" ]]; then
+        install_ubuntu
+    else
+        print_colored "red" "Unsupported distribution. Exiting."
+        exit 1
+    fi
+
+    install_dev_tools
+
+    print_colored "green" "Installation completed successfully!"
+}
+
+main
