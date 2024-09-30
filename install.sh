@@ -191,8 +191,8 @@ EOF
     )
 
     # Install additional packages
-    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk lua luarocks obsidian discord
-    paru -S --noconfirm lazydocker brave-bin slack-desktop
+    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk lua luarocks obsidian discord zed
+    paru -S --noconfirm lazydocker brave-bin slack-desktop zen-browser-bin
 
     configure_docker
     configure_neovim
