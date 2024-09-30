@@ -112,6 +112,36 @@ configure_zsh() {
     fi
 
     chsh -s $(which zsh)
+
+    cd ~/.local/state
+    mkdir zsh
+    touch history
+}
+
+# Configure Docker
+configure_docker() {
+    print_colored "blue" "Configuring Docker..."
+
+    if [[ "$DISTRO" == "arch" ]]; then
+        sudo pacman -S --noconfirm docker
+    elif [[ "$DISTRO" == "ubuntu" ]]; then
+        sudo apt-get install -y ca-certificates curl
+        sudo install -m 0755 -d /etc/apt/keyrings
+        sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        sudo apt update
+        sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    fi
+
+    # Enable and start Docker daemon
+    sudo systemctl enable docker
+    sudo systemctl start docker
+
+    # Add user to Docker group
+    sudo usermod -aG docker $USER
+
+    print_colored "green" "Docker has been installed and configured. You may need to log out and back in for group changes to take effect."
 }
 
 # Arch-specific installation
@@ -161,12 +191,10 @@ EOF
     )
 
     # Install additional packages
-    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages docker docker-compose python-pip flatpak podman go php composer jdk22-openjdk lua luarocks
-    paru -S --noconfirm lazydocker
+    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk lua luarocks obsidian discord
+    paru -S --noconfirm lazydocker brave-bin slack-desktop
 
-    # Install Flatpak applications
-    sudo flatpak install flathub com.brave.Browser com.slack.Slack md.obsidian.Obsidian
-
+    configure_docker
     configure_neovim
 }
 
@@ -182,17 +210,10 @@ install_ubuntu() {
     curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
     echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
 
-    # Docker installation
-    sudo apt-get install -y ca-certificates curl
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
     sudo apt update
 
     # Install packages
-    sudo apt install -y neovim ripgrep fd-find python3.12-venv xclip bash-completion eza bat glow man-db docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 luarocks
+    sudo apt install -y neovim ripgrep fd-find python3.12-venv xclip bash-completion eza bat glow man-db python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 luarocks
 
     # Install Nix packages
     nix-env -iA nixpkgs.lazygit nixpkgs.lazydocker nixpkgs.xdg-ninja nixpkgs.fzf
@@ -207,6 +228,7 @@ install_ubuntu() {
     # Install Snap applications
     sudo snap install brave slack obsidian --classic
 
+    configure_docker
     configure_neovim
 }
 
