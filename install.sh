@@ -191,8 +191,13 @@ EOF
     )
 
     # Install additional packages
-    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk lua luarocks obsidian discord zed fastfetch dbeaver
+    sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat \
+        glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk \
+        lua luarocks obsidian discord zed fastfetch dbeaver spotify-launcher
     paru -S --noconfirm lazydocker brave-bin slack-desktop zen-browser-bin
+
+    sudo systemctl enable bluetooth
+    sudo systemctl start bluetooth
 
     configure_docker
     configure_neovim
@@ -213,7 +218,9 @@ install_ubuntu() {
     sudo apt update
 
     # Install packages
-    sudo apt install -y neovim ripgrep fd-find python3.12-venv xclip bash-completion eza bat glow man-db python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 luarocks
+    sudo apt install -y neovim ripgrep fd-find python3.12-venv xclip bash-completion eza \
+        bat glow man-db python3-pip podman golang-go php php-cli openjdk-21-jdk lua5.4 \
+        luarocks
 
     # Install Nix packages
     nix-env -iA nixpkgs.lazygit nixpkgs.lazydocker nixpkgs.xdg-ninja nixpkgs.fzf
