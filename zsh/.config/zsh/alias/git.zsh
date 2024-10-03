@@ -19,8 +19,12 @@ alias gpl="git pull"
 alias gps="git push"
 alias gpst='git push --follow-tags origin main'
 
+alias gco="git checkout"
+alias gcom="git checkout main"
+
 alias gsmi="git submodule init"
 alias gsmdi='git submodule deinit'
 alias gsmu="git submodule update"
 alias gsma="git submodule add"
 alias gsms="git submodule init && git submodule update"
+alias gsmrn="git mv"

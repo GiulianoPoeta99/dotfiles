@@ -196,8 +196,21 @@ EOF
         lua luarocks obsidian discord zed fastfetch dbeaver spotify-launcher
     paru -S --noconfirm lazydocker brave-bin slack-desktop zen-browser-bin
 
+    # habilitar el bluetooth
     sudo systemctl enable bluetooth
     sudo systemctl start bluetooth
+
+    # habilitar la impresion
+    sudo pacman -S cups gutenprint foomatic-db foomatic-db-engine foomatic-db-nonfree hplip splix cups-pdf
+    sudo systemctl enable cups.service
+    sudo systemctl start cups.service
+    sudo pacman -S system-config-printer
+    sudo gpasswd -a ${USER} sys
+    sudo pacman -S avahi nss-mdns
+    sudo systemctl enable avahi-daemon
+    sudo systemctl start avahi-daemon
+
+
 
     configure_docker
     configure_neovim
