@@ -7,7 +7,8 @@ return {
 
 	--?=====================================================================================================================
 	-- Tema Catppuccin Mocha
-	color_scheme = "Catppuccin Mocha",
+	-- color_scheme = "Catppuccin Mocha",
+	color_scheme = "Ayu Dark (Gogh)",
 
 	-- Ejemplo de transparencia
 	-- window_background_opacity = 0.85,
