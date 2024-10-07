@@ -49,3 +49,4 @@ source ~/.config/zsh/alias/docker.zsh # docker
 source ~/.config/zsh/alias/git.zsh # git
 source ~/.config/zsh/alias/copy.zsh # copy
 source ~/.config/zsh/alias/gpt.zsh # gpt
+source ~/.config/zsh/alias/pacman.zsh # pacman
