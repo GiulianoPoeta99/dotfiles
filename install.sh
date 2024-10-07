@@ -87,7 +87,7 @@ configure_nix() {
 configure_zsh() {
     print_colored "blue" "Configuring Zsh..."
     if [[ "$DISTRO" == "arch" ]]; then
-        sudo pacman -S --noconfirm zsh fzf zoxide
+        sudo pacman -S --noconfirm zsh fzf zoxide nushell
     elif [[ "$DISTRO" == "ubuntu" ]]; then
         sudo apt install -y zsh fzf
     fi

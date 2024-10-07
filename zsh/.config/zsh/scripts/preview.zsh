@@ -5,7 +5,7 @@ preview() {
     if [ -d "$1" ]; then
         eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos "$1"
     elif [ -f "$1" ]; then
-        batcat --color=always "$1"
+        bat --color=always "$1"
     else
         echo "Entrada no válida: $1"
     fi
