@@ -15,7 +15,7 @@ return {
 
 	--?=====================================================================================================================
 	-- Fuente FiraCode Nerd Font con ligaduras y emojis
-	font = wezterm.font("FiraCode Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" }),
+	font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" }),
 	font_size = 12.0,
 	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
 	adjust_window_size_when_changing_font_size = false,
