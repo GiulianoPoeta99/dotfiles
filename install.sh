@@ -105,8 +105,8 @@ configure_zsh() {
     curl -sS https://starship.rs/install.sh | sh
 
     if [[ "$WSL" =~ ^[Nn]$ ]]; then
-        mkdir -p ~/.local/share/fonts/nerd-fonts
-        cp ~/Downloads/FiraCode.zip ~
+        mkdir -p ~/.local/share/fonts/nerd-fonts && cd ~/.local/share/fonts/nerd-fonts
+        cp ~/Downloads/FiraCode.zip .
         unzip FiraCode.zip && rm FiraCode.zip
         fc-match FiraCodeNerdFont -a
     fi
@@ -192,9 +192,9 @@ EOF
 
     # Install additional packages
     sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion eza bat \
-        glow man-db man-pages python-pip flatpak podman go php composer jdk22-openjdk \
-        lua luarocks obsidian discord zed fastfetch dbeaver spotify-launcher bashtop
-    paru -S --noconfirm lazydocker brave-bin slack-desktop zen-browser-bin freeoffice
+        glow man-db man-pages python-pip podman go php composer jdk21-openjdk \
+        lua luarocks obsidian discord fastfetch dbeaver spotify-launcher bashtop
+    paru -S --noconfirm lazydocker brave-bin zen-browser-bin freeoffice
 
     # habilitar el bluetooth
     sudo systemctl enable bluetooth
@@ -209,8 +209,6 @@ EOF
     sudo pacman -S avahi nss-mdns
     sudo systemctl enable avahi-daemon
     sudo systemctl start avahi-daemon
-
-
 
     configure_docker
     configure_neovim
