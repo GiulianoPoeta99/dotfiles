@@ -1,9 +1,20 @@
-alias l='nu -c "ls | sort-by name -r"'
-alias ll='nu -c "ls -l | sort-by name -r"'
-alias la='nu -c "ls -a | sort-by name -r"'
-alias lla='nu -c "ls -la | sort-by name -r"'
 
 
+l() {
+  nu -c "ls $1 | sort-by name -r"
+}
+
+ll() {
+  nu -c "ls -l $1 | sort-by name -r"
+}
+
+la() {
+  nu -c "ls -a $1 | sort-by name -r"
+}
+
+lla() {
+  nu -c "ls -la $1 | sort-by name -r"
+}
 
 # # normal
 # # not git ignore

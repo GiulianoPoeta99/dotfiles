@@ -15,6 +15,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
+zinit light svallory/zsh-shift-select-like-vscode
 
 # OhMyZsh ==============================================================================================================
 
@@ -95,6 +96,7 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # eval "$(zellij setup --generate-auto-start zsh)"
 
+eval $(thefuck --alias)
 
 # Prompt ===============================================================================================================
 

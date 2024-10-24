@@ -292,7 +292,6 @@ _comps=(
 'dmesg' '_dmesg'
 'dmidecode' '_dmidecode'
 'doas' '_doas'
-'docker' '_docker'
 'docpad' '_docpad'
 'domainname' '_yp'
 'do-release-upgrade' '_do-release-upgrade'
@@ -999,6 +998,7 @@ _comps=(
 'parec' '_pulseaudio'
 'parecord' '_pulseaudio'
 'paru' '_paru'
+'pass' '_pass'
 'passwd' '_users'
 'paste' '_paste'
 'pasuspender' '_pulseaudio'
@@ -1879,11 +1879,11 @@ autoload -Uz _afew _android _archlinux-java _artisan _atach \
             _udisksctl _ufw _virtualbox _vnstat _wemux \
             _wg-quick _xsel _yarn _zcash-cli _zinit \
             _bat _bootctl _busctl _bwrap _code \
-            _coredumpctl _ctr _curl _docker _eza \
-            _fastfetch _fd _flatpak _glow _hostnamectl \
-            _journalctl _kernel-install _libinput _localectl _loginctl \
-            _luarocks _luarocks-admin _machinectl _mkinitcpio _networkctl \
-            _oomctl _pacman _paru _pip _podman \
+            _coredumpctl _ctr _curl _eza _fastfetch \
+            _fd _flatpak _glow _hostnamectl _journalctl \
+            _kernel-install _libinput _localectl _loginctl _luarocks \
+            _luarocks-admin _machinectl _mkinitcpio _networkctl _oomctl \
+            _pacman _paru _pass _pip _podman \
             _podman-remote _pulseaudio _qpdf _resolvectl _rg \
             _run0 _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files \
             _sqv _systemctl _systemd _systemd-analyze _systemd-delta \
