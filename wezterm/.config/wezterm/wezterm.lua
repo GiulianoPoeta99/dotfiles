@@ -8,7 +8,7 @@ return {
 	--?=====================================================================================================================
 	-- Tema Catppuccin Mocha
 	-- color_scheme = "Catppuccin Mocha",
-	color_scheme = "Ayu Dark (Gogh)",
+	color_scheme = "Gruvbox Dark (Gogh)",
 
 	-- Ejemplo de transparencia
 	-- window_background_opacity = 0.85,
@@ -63,7 +63,7 @@ return {
 
 		-- { key = "|", mods = "CTRL|SHIFT", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 		{ key = "|", mods = "CTRL|SHIFT", action = wezterm.action({ ShowLauncherArgs = { flags = "COMMANDS" } }) },
-		
+
 		-- Navegar entre paneles
 		-- { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
 		-- { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
@@ -76,9 +76,12 @@ return {
 		-- { key = "UpArrow", mods = "CTRL|ALT", action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }) },
 		-- { key = "DownArrow", mods = "CTRL|ALT", action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }) },
 
+		-- Deshabilitar para plugin de movilidad
+		{ key = "LeftArrow", mods = "CTRL|SHIFT", action = "DisableDefaultAssignment" },
+		{ key = "RightArrow", mods = "CTRL|SHIFT", action = "DisableDefaultAssignment" },
+
 		-- Búsqueda
 		{ key = "F", mods = "CTRL|SHIFT", action = wezterm.action({ Search = { CaseSensitiveString = "" } }) },
-
 
 		-- Scrollback
 		{ key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action({ ScrollByPage = -1 }) },
