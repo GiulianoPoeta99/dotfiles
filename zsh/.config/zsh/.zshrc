@@ -79,6 +79,8 @@ alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168
 
 export PATH="/usr/bin/flutter/bin:$PATH"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Shell integrations ===================================================================================================
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
@@ -101,3 +103,11 @@ eval $(thefuck --alias)
 # Prompt ===============================================================================================================
 
 eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/home/gip/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -1,5 +1,11 @@
 # generales
 
+alias ff="fastfetch"
+alias of="onefetch"
+
+# nvim
+alias n="nvim"
+
 # sudo
 pls() {
     if command -v sudo &> /dev/null; then
