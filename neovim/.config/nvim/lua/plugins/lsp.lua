@@ -25,6 +25,9 @@ return {
         -- rust
         "rust-analyzer",
         "codelldb",
+        -- cpp
+        "clangd",
+        "clang-format",
       },
     },
   },
