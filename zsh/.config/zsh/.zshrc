@@ -33,13 +33,13 @@ zinit cdreplay -q
 
 bindkey -e
 
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-fordward
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-fordward
 
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
-bindkey '5~' backward-kill-word
+# bindkey '5~' backward-kill-word
 
 fg_widget() {
     fg
