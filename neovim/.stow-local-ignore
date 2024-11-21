@@ -22,4 +22,5 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 
-^/v1
+^/v*
+^/lazyvim
