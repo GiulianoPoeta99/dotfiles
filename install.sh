@@ -81,7 +81,7 @@ configure_git() {
   if [[ "$DISTRO" == "arch" ]]; then
     sudo pacman -Syu --noconfirm && pacman -S --noconfirm git
   elif [[ "$DISTRO" == "ubuntu" ]]; then
-    sudo apt update && sudo apt install -y git
+    sudo apt-get update && sudo apt install -y git
   fi
 
   # Configure Git settings

@@ -31,6 +31,7 @@ EOF
   sudo nano /etc/pacman.conf
 
   # Install AUR helper
+  print_colored "yellow" "Installing AUR..."
   (
     cd "$REPOS_DIR"
     git clone https://aur.archlinux.org/paru-bin.git
@@ -39,6 +40,7 @@ EOF
   )
 
   # Install BlackArch repository
+  print_colored "yellow" "Adding package repository..."
   (
     cd "$REPOS_DIR"
     mkdir blackarch && cd blackarch
@@ -46,7 +48,6 @@ EOF
     chmod +x strap.sh && sudo ./strap.sh
   )
 
-  configure_nix
   configure_zsh_arch
   configure_docker_arch
   configure_neovim
@@ -58,7 +59,8 @@ configure_zsh_arch() {
   print_colored "blue" "Configuring Zsh..."
 
   # Install required packages
-  sudo pacman -S --noconfirm zsh fzf zoxide nushell
+  sudo pacman -S --noconfirm zsh fzf zoxide nushell eza onefetch fastfetch bashtop xclip bat lazygit glow
+  paru -S --noconfirm lazydocker
 
   # Configure zoxide
   echo 'eval "$(zoxide init --cmd cd bash)"' >>~/.bashrc
@@ -94,25 +96,34 @@ configure_zsh_arch() {
   print_colored "green" "Zsh configuration completed"
 }
 
+configure_hyprland() {
+  sudo pacman -S --noconfirm hyprland wofi waybar ttf-font-awesome
+}
+
 configure_neovim() {
   print_colored "blue" "Configuring Neovim..."
+  sudo pacman -S --noconfirm neovim ripgrep fd python-pip python-pipx go php composer jdk21-openjdk lua luarocks
+  paru -S --noconfirm rvm
+  pipx install poetry
   cd ~/dotfiles/
   stow neovim
 }
 
 configure_docker_arch() {
+  cd ~
   print_colored "blue" "Configuring Docker..."
-  sudo pacman -S --noconfirm docker
+  print_colored "yellow" "First download the last package from https://docs.docker.com/desktop/release-notes/"
+  wget https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz -qO- | tar xvfz - docker/docker --strip-components=1
+  mv ./docker /usr/local/bin
+  sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
   systemctl --user start docker-desktop
   systemctl --user enable docker-desktop
   sudo usermod -aG docker $USER
 }
 
 install_arch_packages() {
-  sudo pacman -S --noconfirm neovim ripgrep lazygit fd xclip bash-completion bat \
-    glow man-db man-pages python-pip podman go php composer jdk21-openjdk \
-    lua luarocks obsidian discord fastfetch onefetch dbeaver spotify-launcher bashtop
-  paru -S --noconfirm lazydocker brave-bin zen-browser-bin freeoffice
+  sudo pacman -S --noconfirm bash-completion man-db man-pages podman obsidian discord spotify-launcher
+  paru -S --noconfirm brave-bin zen-browser-bin freeoffice
 }
 
 configure_system_services_arch() {
