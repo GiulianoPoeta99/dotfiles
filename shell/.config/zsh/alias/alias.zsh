@@ -20,8 +20,7 @@ pls() {
 # fzf 
 alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 
-# paru = yay
-alias yay='paru'
+
 
 ..() {
   local count=${1:-1}
