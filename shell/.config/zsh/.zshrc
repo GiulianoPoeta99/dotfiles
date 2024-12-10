@@ -29,25 +29,6 @@ zinit snippet OMZP::colorize
 autoload -U compinit && compinit
 zinit cdreplay -q
 
-# Keybindings ==========================================================================================================
-
-bindkey -e
-
-# bindkey '^p' history-search-backward
-# bindkey '^n' history-search-fordward
-
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
-
-# bindkey '5~' backward-kill-word
-
-fg_widget() {
-    fg
-}
-zle -N fg_widget
-
-bindkey '^Z' fg_widget
-
 # History ==============================================================================================================
 
 HISTSIZE=5000
@@ -75,17 +56,29 @@ zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zs
 zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:rm:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
+# Keybindings ==========================================================================================================
+
+bindkey -e
+
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-fordward
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+# bindkey '5~' backward-kill-word
+
+fg_widget() {
+    fg
+}
+zle -N fg_widget
+bindkey '^Z' fg_widget
+
 # Aliases ==============================================================================================================
 
 source ~/.config/zsh/alias/alias.zsh
 
-alias c='clear'
-alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
-
-# Path ==============================================================================================================
+# Path =================================================================================================================
 
 export PATH="/usr/bin/flutter/bin:$PATH"
-
 export PATH="$HOME/.local/bin:$PATH"
 
 # Shell integrations ===================================================================================================
@@ -96,21 +89,6 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$PATH:/home/$USER/.config/nvm/versions/node/v20.11.1/bin/npm"
 
-# para usar brave con flutter
-export CHROME_EXECUTABLE="brave"
-
-eval "$(fzf --zsh)"
-
-eval "$(zoxide init --cmd cd zsh)"
-
-# eval "$(zellij setup --generate-auto-start zsh)"
-
-eval $(thefuck --alias)
-
-# Prompt ===============================================================================================================
-
-eval "$(starship init zsh)"
-
 # pnpm
 export PNPM_HOME="/home/gip/.local/share/pnpm"
 case ":$PATH:" in
@@ -118,3 +96,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# para usar brave con flutter
+export CHROME_EXECUTABLE="brave"
+
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+# eval "$(zellij setup --generate-auto-start zsh)"
+eval $(thefuck --alias)
+
+# Prompt ===============================================================================================================
+
+eval "$(starship init zsh)"

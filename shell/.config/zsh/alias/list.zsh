@@ -17,7 +17,8 @@ lla() {
 }
 
 # tree
-
+alias t='eza -T --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '
+alias ta='eza -aT --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '
 alias lt='eza -lT --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '
 alias lta='eza -alT --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '
 alias llt='eza -lThHimMSuUXZo --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '

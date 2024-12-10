@@ -1,10 +1,12 @@
 # generales
-
+alias c='clear'
+alias rmrf="rm -rf"
+alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
 alias ff="fastfetch"
 alias of="onefetch"
-
-# nvim
 alias n="nvim"
+alias vs="code ."
+alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
 
 # sudo
 pls() {
@@ -17,16 +19,10 @@ pls() {
     fi
 }
 
-# fzf 
-alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
-
-
-
 ..() {
   local count=${1:-1}
   local dots=""
   
-  # Construir la cadena de puntos para cd..
   for ((i = 0; i < count; i++)); do
     dots+=".."
     if [ $i -lt $((count - 1)) ]; then
@@ -34,7 +30,6 @@ alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 
     fi
   done
   
-  # Ejecutar el comando cd con la cadena construida
   cd $dots
 }
 
@@ -43,15 +38,11 @@ if [ -x "$(command -v batcat)" ]; then
   alias bat='batcat'
 fi
 
-alias rmrf="rm -rf"
 
-
-# ********************************************************************************************************************************************************
-#
+# **********************************************************************************************************************
 source ~/.config/zsh/alias/update.zsh # update
 source ~/.config/zsh/alias/list.zsh # ls 
 source ~/.config/zsh/alias/docker.zsh # docker
 source ~/.config/zsh/alias/git.zsh # git
 source ~/.config/zsh/alias/copy.zsh # copy
-source ~/.config/zsh/alias/gpt.zsh # gpt
 source ~/.config/zsh/alias/pacman.zsh # pacman

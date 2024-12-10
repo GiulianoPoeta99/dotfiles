@@ -1,5 +1,7 @@
 alias glz="lazygit"
 
+alias gi="git init"
+
 alias gcl='git clone'
 
 alias gs="git status"
@@ -21,6 +23,26 @@ alias gpst='git push --follow-tags origin main'
 
 alias gco="git checkout"
 alias gcom="git checkout main"
+alias gcob="git checkout -b"
+
+alias gb="git branch"
+
+alias gr="git remote"
+alias grv="git remote -v"
+alias gra="git remote add"
+
+alias gm="git merge"
+
+alias grh="git reset HEAD~"
+
+alias gf="git fetch"
+alias gfu="git fetch upstream"
+
+alias gsh="git stash"
+alias gshl="git stash list"
+alias gshs="git stash show -p"
+alias gsha="git stash apply"
+alias gshd="git stash drop"
 
 alias gsmi="git submodule init"
 alias gsmdi='git submodule deinit'
