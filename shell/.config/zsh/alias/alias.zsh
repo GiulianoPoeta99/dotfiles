@@ -6,7 +6,8 @@ alias ff="fastfetch"
 alias of="onefetch"
 alias n="nvim"
 alias vs="code ."
-alias fzfd='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+alias fzb='fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}"'
+alias fzn='nvim $(fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}")'
 
 # sudo
 pls() {
@@ -35,7 +36,9 @@ pls() {
 
 # bat
 if [ -x "$(command -v batcat)" ]; then
-  alias bat='batcat'
+  alias bat='batcat --theme=gruvbox-dark'
+else
+  alias bat='bat --theme=gruvbox-dark'
 fi
 
 

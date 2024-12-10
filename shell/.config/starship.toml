@@ -214,7 +214,7 @@ disabled = false
 
 [memory_usage]
 threshold = 50
-format = " [∥](bright-blue) [$ram[ | ](white)$swap]($style) "
+format = " [∥](bright-blue) [$ram[|](white)$swap]($style)"
 style = "white bold dimmed"
 symbol = " "
 disabled = false
