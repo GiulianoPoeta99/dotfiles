@@ -1,5 +1,5 @@
 "$schema" = "https://starship.rs/config-schema.json"
-format = """[╓─⟦](bright-blue)$os$shell$shlvl$memory_usage$kubernetes$direnv$docker_context$singularity$vagrant$nix_shell$guix_shell$spack$meson$conda$terraform$pulumi$buf$nats[⟧](bright-blue) [⟦](bright-blue)$aws$gcloud$openstack$azure[⟧](bright-blue)
+format = """[╓─⟦](bright-blue)$os$shell$shlvl$memory_usage$kubernetes$direnv$docker_context$singularity$vagrant$nix_shell$guix_shell$spack$meson$conda$terraform$pulumi$buf$nats$aws$gcloud$openstack$azure[⟧](bright-blue)
 [╟⟪](bright-blue)$directory[⟫](bright-blue) [⟪](bright-blue)$git_branch$git_commit$git_state$git_metrics$git_status$vcsh$package$python$rust$zig$gleam$c$dotnet$golang$php$dart$java$kotlin$crystal$elixir$elm$erlang$fennel$gradle$haskell$haxe$helm$julia$lua$nim$ocaml$odin$opa$perl$purescript$quarto$raku$rlang$red$ruby$scala$solidity$swift$typst$vlang$daml$cobol$cmake$bun$deno$nodejs[⟫](bright-blue) $fossil_branch$fossil_metrics $hg_branch $pijul_channel
 [╙─](bright-blue)$container$sudo$jobs$status$character"""
 right_format = "$battery [⟪](bright-blue)$username$hostname$localip[⟫](bright-blue) [⟪](bright-blue)$time$cmd_duration[⟫](bright-blue)"
@@ -956,7 +956,7 @@ detect_folders = []
 
 # ON ===========================================================================
 [aws]
-format = '[$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+format = ' [∥](bright-blue) [$symbol($profile )(\($region\) )(\[$duration\])]($style)'
 symbol = "☁️  "
 style = "bold yellow"
 disabled = false
