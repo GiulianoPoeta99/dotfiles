@@ -1,7 +1,5 @@
-# FORMAT ===============================================================================================================
-# $all is shorthand for $kubernetes $aws$gcloud$openstack$azure
 "$schema" = "https://starship.rs/config-schema.json"
-format = """[╓─⟦](bright-blue)$os$shell$shlvl$memory_usage$direnv$docker_context$singularity$vagrant$nix_shell$guix_shell$spack$meson$conda$terraform$pulumi$buf$nats[⟧](bright-blue)
+format = """[╓─⟦](bright-blue)$os$shell$shlvl$memory_usage$kubernetes$direnv$docker_context$singularity$vagrant$nix_shell$guix_shell$spack$meson$conda$terraform$pulumi$buf$nats[⟧](bright-blue) [⟦](bright-blue)$aws$gcloud$openstack$azure[⟧](bright-blue)
 [╟⟪](bright-blue)$directory[⟫](bright-blue) [⟪](bright-blue)$git_branch$git_commit$git_state$git_metrics$git_status$vcsh$package$python$rust$zig$gleam$c$dotnet$golang$php$dart$java$kotlin$crystal$elixir$elm$erlang$fennel$gradle$haskell$haxe$helm$julia$lua$nim$ocaml$odin$opa$perl$purescript$quarto$raku$rlang$red$ruby$scala$solidity$swift$typst$vlang$daml$cobol$cmake$bun$deno$nodejs[⟫](bright-blue) $fossil_branch$fossil_metrics $hg_branch $pijul_channel
 [╙─](bright-blue)$container$sudo$jobs$status$character"""
 right_format = "$battery [⟪](bright-blue)$username$hostname$localip[⟫](bright-blue) [⟪](bright-blue)$time$cmd_duration[⟫](bright-blue)"
@@ -229,12 +227,11 @@ display_private = false
 disabled = false
 version_format = "v${raw}"
 
-# VIRTUALIZACION ---------------------------------------------------------------
 [kubernetes]
 symbol = "☸ "
-format = '[$symbol$context( \($namespace\))]($style) in '
+format = ' [∥](bright-blue) [$symbol$context( \($namespace\))]($style)'
 style = "cyan bold"
-disabled = true
+disabled = false
 detect_extensions = []
 detect_files = []
 detect_folders = []
@@ -959,7 +956,7 @@ detect_folders = []
 
 # ON ===========================================================================
 [aws]
-format = 'on [$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+format = '[$symbol($profile )(\($region\) )(\[$duration\])]($style)'
 symbol = "☁️  "
 style = "bold yellow"
 disabled = false
@@ -971,7 +968,7 @@ force_display = false
 [aws.profile_aliases]
 
 [azure]
-format = "on [$symbol($subscription)]($style) "
+format = " [∥](bright-blue) [$symbol($subscription)]($style)"
 symbol = "󰠅 "
 style = "blue bold"
 disabled = true
@@ -979,7 +976,7 @@ disabled = true
 [azure.subscription_aliases]
 
 [gcloud]
-format = 'on [$symbol$account(@$domain)(\($region\))]($style) '
+format = ' [∥](bright-blue) [$symbol$account(@$domain)(\($region\))]($style)'
 symbol = "☁️  "
 style = "bold blue"
 disabled = false
@@ -990,7 +987,7 @@ detect_env_vars = []
 [gcloud.project_aliases]
 
 [openstack]
-format = 'on [$symbol$cloud(\($project\))]($style) '
+format = ' [∥](bright-blue) [$symbol$cloud(\($project\))]($style)'
 symbol = "☁️  "
 style = "bold yellow"
 disabled = false
