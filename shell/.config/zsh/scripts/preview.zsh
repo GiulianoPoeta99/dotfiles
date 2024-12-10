@@ -1,5 +1,3 @@
-
-
 # Función para determinar si una entrada es un directorio o un archivo
 preview() {
     if [ -d "$1" ]; then
