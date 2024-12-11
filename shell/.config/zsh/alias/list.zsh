@@ -1,5 +1,3 @@
-
-
 l() {
   nu -c "ls $1 | sort-by name -r"
 }
