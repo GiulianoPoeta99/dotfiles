@@ -105,6 +105,8 @@ eval "$(zoxide init --cmd cd zsh)"
 # eval "$(zellij setup --generate-auto-start zsh)"
 eval $(thefuck --alias)
 
+eval "$(atuin init zsh)"
+
 # Prompt ===============================================================================================================
 
 eval "$(starship init zsh)"

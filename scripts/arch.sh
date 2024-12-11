@@ -59,9 +59,11 @@ configure_zsh_arch() {
   print_colored "blue" "Configuring Zsh..."
 
   # Install required packages
-  sudo pacman -S --noconfirm zsh fzf zoxide nushell eza onefetch fastfetch bashtop xclip bat lazygit glow
+  sudo pacman -S --noconfirm zsh fzf zoxide nushell eza onefetch fastfetch bashtop xclip bat lazygit glow atuin
   paru -S --noconfirm lazydocker
 
+  atuin import auto
+  
   # Configure zoxide
   echo 'eval "$(zoxide init --cmd cd bash)"' >>~/.bashrc
 
@@ -122,8 +124,27 @@ configure_docker_arch() {
 }
 
 install_arch_packages() {
-  sudo pacman -S --noconfirm bash-completion man-db man-pages podman obsidian discord spotify-launcher
-  paru -S --noconfirm brave-bin zen-browser-bin freeoffice
+  sudo pacman -S --noconfirm bash-completion man-db man-pages podman discord spotify-launcher just tokei kondo sd git-delta
+  paru -S --noconfirm brave-bin zen-browser-bin
+
+  cat <<EOF
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
+    # side-by-side = true
+    line-numbers = true
+    hyperlinks = true
+    syntax-theme = gruvbox-dark
+
+[merge]
+    conflictstyle = zdiff3
+EOF
 }
 
 configure_system_services_arch() {
