@@ -100,6 +100,9 @@ $env.NU_PLUGIN_DIRS = [
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
 
+mkdir ~/.local/share/zoxide/
+zoxide init --cmd cd  nushell | save -f ~/.local/share/zoxide/init.nu
+
 mkdir ~/.local/share/atuin/
 atuin init nu | save -f ~/.local/share/atuin/init.nu
 

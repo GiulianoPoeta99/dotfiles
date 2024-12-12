@@ -1,6 +1,6 @@
 alias dlz='lazydocker'
 
-alias dps='docker ps'
+alias dps='nu -c "docker ps | detect columns"'
 alias dst='docker stop'
 
 # System
@@ -9,7 +9,7 @@ alias dcp='docker container prune'
 alias dvp='docker volume prune'
 
 # Images
-alias dimg='docker images'
+alias dimg='nu -c "docker images | detect columns"'
 alias drmi='docker rmi'
 alias drmia='docker rmi $(docker images -a -q)'
 
@@ -33,7 +33,7 @@ alias dcrd='docker compose down && docker compose up -d'
 alias dcubd='docker compose up -d --build'
 alias dcrbd='docker compose down && docker compose up --build -d'
 alias dcexe='docker compose exec'
-alias dcps='docker compose ps'
+alias dcps='nu -c "docker compose ps | detect columns"'
 alias dcat='docker compose attach'
 
 dcent() {

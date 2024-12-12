@@ -823,6 +823,8 @@ $env.config = {
     ]
 }
 
+source ~/.local/share/zoxide/init.nu
 source ~/.local/share/atuin/init.nu
+source ~/.config/nushell/alias/alias.nu
 
 use ~/.cache/starship/init.nu

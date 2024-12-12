@@ -1,49 +1,38 @@
 alias glz="lazygit"
-
 alias gi="git init"
-
-alias gcl='git clone'
-
+alias gcl='git clone --progress'
+alias gclv='git clone -v --progress'
 alias gs="git status"
 alias gss="git status -s"
-
 alias gl="git log --all --oneline --graph"
 alias gla="git log --all --graph"
-
-alias ga="git add"
-alias gaa="git add -A"
-
+alias glt='nu -c "git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | first 15"'
+alias glup='nu -c "git log --pretty=%h»¦«%aN»¦«%s»¦«%aD | lines | split column "»¦«" sha1 committer desc merged_at | histogram committer merger | sort-by merger | reverse"'
+alias ga="git add -v"
+alias gaa="git add -Av"
 alias gc="git commit"
 alias gcm="git commit -m"
 alias gcam="git commit -am"
-
+alias gca="git commit --amend"
 alias gpl="git pull"
 alias gps="git push"
 alias gpst='git push --follow-tags origin main'
-
 alias gco="git checkout"
 alias gcom="git checkout main"
 alias gcob="git checkout -b"
-
 alias gb="git branch"
-
 alias gr="git remote"
 alias grv="git remote -v"
 alias gra="git remote add"
-
 alias gm="git merge"
-
 alias grh="git reset HEAD~"
-
 alias gf="git fetch"
 alias gfu="git fetch upstream"
-
 alias gsh="git stash"
 alias gshl="git stash list"
 alias gshs="git stash show -p"
 alias gsha="git stash apply"
 alias gshd="git stash drop"
-
 alias gsmi="git submodule init"
 alias gsmdi='git submodule deinit'
 alias gsmu="git submodule update"
