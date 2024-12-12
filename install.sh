@@ -3,10 +3,11 @@
 set -e
 
 ###########################################
-# Constants and Global Variables
+# CONSTANTS AND GLOBAL VARIABLES
 ###########################################
 readonly VALID_DISTROS="arch|ubuntu"
 readonly VALID_YES_NO="Y|N|y|n"
+readonly WORKING_DIR="$(pwd)"
 
 declare REPOS_DIR=""
 declare GIT_NAME=""
@@ -17,7 +18,7 @@ declare NIX=""
 declare FONT_ZIP=""
 
 ###########################################
-# Utility Functions
+# UTILITY FUNCTIONS
 ###########################################
 print_colored() {
   local color=$1
@@ -51,13 +52,13 @@ command_exists() {
 }
 
 ###########################################
-# Installation Setup Functions
+# INSTALLATION SETUP FUNCTIONS
 ###########################################
 init_script() {
   print_colored "blue" "Starting installation..."
 
   # Get font file path
-  FONT_ZIP=$(get_input "Enter the path to the FiraCode Nerd Font ZIP file: ")
+  FONT_ZIP=$(get_input "Enter the path to the Nerd Font ZIP file: ")
   if [[ ! -f "$FONT_ZIP" ]]; then
     print_colored "red" "File does not exist: $FONT_ZIP"
     exit 1
@@ -72,97 +73,16 @@ init_script() {
 }
 
 ###########################################
-# Core Tool Configuration Functions
-###########################################
-configure_git() {
-  print_colored "blue" "Configuring Git..."
-
-  # Install Git based on distribution
-  if [[ "$DISTRO" == "arch" ]]; then
-    sudo pacman -Syu --noconfirm && pacman -S --noconfirm git
-  elif [[ "$DISTRO" == "ubuntu" ]]; then
-    sudo apt-get update && sudo apt install -y git
-  fi
-
-  # Configure Git settings
-  GIT_NAME=$(get_input "Enter your Git username: ")
-  GIT_EMAIL=$(get_input "Enter your Git email: ")
-
-  git config --global user.name "$GIT_NAME"
-  git config --global user.email "$GIT_EMAIL"
-  git config --global core.editor "vim"
-  git config --global credential.helper store
-  git config --global color.status.changed yellow
-  git config --global init.defaultBranch "main"
-}
-
-###########################################
-# Font Configuration Functions
-###########################################
-install_nerd_font() {
-  local font_zip="$1"
-  local font_name=$(basename "$font_zip" .zip)
-
-  print_colored "blue" "Installing Nerd Font: $font_name"
-
-  local font_dir="$HOME/.local/share/fonts/nerd-fonts"
-  mkdir -p "$font_dir"
-
-  cd "$font_dir"
-  cp "$font_zip" .
-  unzip -o "$(basename "$font_zip")"
-  rm "$(basename "$font_zip")"
-
-  fc-cache -fv
-
-  local font_pattern="${font_name//-/ }"
-  print_colored "blue" "Checking font installation for: $font_pattern"
-
-  if fc-list | grep -i "$font_pattern" >/dev/null; then
-    print_colored "green" "Font installed successfully"
-    fc-match "$font_pattern" -a
-  else
-    print_colored "yellow" "Warning: Font might not be properly installed"
-    print_colored "yellow" "Available similar fonts:"
-    fc-list | grep -i "nerd" | cut -d: -f2 | sort | uniq
-  fi
-}
-
-###########################################
-# Development Tools Installation
-###########################################
-install_dev_tools() {
-  print_colored "blue" "Installing development tools..."
-  install_rust
-  install_node
-}
-
-install_rust() {
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $HOME/.cargo/env
-  rustup update
-}
-
-install_node() {
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  nvm install 22
-}
-
-###########################################
 # Main Execution
 ###########################################
 main() {
   init_script
-  install_dev_tools
-  configure_git
 
   if [[ "$DISTRO" == "arch" ]]; then
-    source ./arch.sh
-    install_arch
+    source ./scripts/arch.sh
+    main_arch
   elif [[ "$DISTRO" == "ubuntu" ]]; then
-    source ./ubuntu.sh
+    source ./scripts/ubuntu.sh
     install_ubuntu
   else
     print_colored "red" "Unsupported distribution. Exiting."
