@@ -823,6 +823,15 @@ $env.config = {
     ]
 }
 
+# let zoxide_completer = {|spans|
+#     $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
+# }
+
+# {
+#     __zoxide_z => $zoxide_completer
+#     __zoxide_zi => $zoxide_completer
+# }
+
 source ~/.local/share/zoxide/init.nu
 source ~/.local/share/atuin/init.nu
 source ~/.config/nushell/alias/alias.nu

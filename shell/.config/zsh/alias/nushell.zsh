@@ -1,6 +1,13 @@
 alias nsh="nu -c"
 
-# list
+ps() {
+  nu -c "ps $@"
+}
+
+df() {
+  nu -c "df $1 | detect columns $2"
+}
+
 l() {
   nu -c "ls $1 | sort-by name"
 }
