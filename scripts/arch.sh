@@ -107,7 +107,7 @@ install_nerd_font() {
 configure_shell() {
    print_colored "blue" "Configuring shell..."
 
-   sudo pacman -S --noconfirm zsh fzf zoxide nushell eza onefetch fastfetch bashtop xclip bat lazygit glow atuin
+   sudo pacman -S --noconfirm zsh fzf zoxide nushell zellij eza onefetch fastfetch bashtop xclip bat lazygit glow atuin
    paru -S --noconfirm lazydocker
 
    atuin import auto

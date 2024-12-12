@@ -66,7 +66,7 @@ init_script() {
 
   # Get system configuration
   WSL=$(get_input "Are you using WSL? (Y/N): " "$VALID_YES_NO")
-  DISTRO=$(get_input "Choose your distribution (arch/ubuntu): " "$VALID_DISTROS")
+  DISTRO=$(get_input "Choose your distribution (arch/ubuntu/fedora/suse): " "$VALID_DISTROS")
   REPOS_DIR=$(get_input "Enter the directory for repositories: ")
 
   mkdir -p "$REPOS_DIR"
@@ -83,7 +83,13 @@ main() {
     main_arch
   elif [[ "$DISTRO" == "ubuntu" ]]; then
     source ./scripts/ubuntu.sh
-    install_ubuntu
+    main_ubuntu
+  elif [[ "$DISTRO" == "fedora" ]]; then
+    source ./scripts/fedora.sh
+    main_ubuntu
+  elif [[ "$DISTRO" == "suse" ]]; then
+    source ./scripts/suse.sh
+    main_ubuntu
   else
     print_colored "red" "Unsupported distribution. Exiting."
     exit 1
