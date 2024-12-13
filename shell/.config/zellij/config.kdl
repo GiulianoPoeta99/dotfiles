@@ -432,7 +432,7 @@ scrollback_editor "/usr/bin/nvim"
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
  
-session_name "Main"
+session_name "Default"
  
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
