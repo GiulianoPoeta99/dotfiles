@@ -1,0 +1,64 @@
+layout {
+    tab name="nvim" focus=true {
+        pane
+    }
+    tab name="dbm" {
+        pane
+    }
+    tab name="api" {
+        pane
+    }
+    tab name="logs" {
+        pane
+    }
+
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left   "#[fg=#83A598,bold] #[fg=#B16286,bold]{session} #[fg=#83A598]∥{tabs}#[fg=#83A598] ⟨{mode}#[fg=#83A598]⟩"
+                format_right  "#[fg=#83A598]⟪{datetime}#[fg=#83A598]⟫"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#9D8F6F]{char}"
+                border_position "top"
+
+                hide_frame_for_single_pane "true"
+
+                mode_normal        "#[fg=#458588]{name}"
+                mode_locked        "#[fg=#EBDBB2]{name}"
+                mode_resize        "#[fg=#d79921]{name}"
+                mode_pane          "#[fg=#FE8019]{name}"
+                mode_tab           "#[fg=#B8BB26]{name}"
+                mode_tmux          "#[fg=#CC241D]{name}"
+                mode_session       "#[fg=#689d6A]{name}"
+                mode_enter_search  "#[fg=#fabd2d]{name}"
+                mode_search        "#[fg=#a89984]{name}"
+                mode_scroll        "#[fg=#d3869b]{name}"
+                mode_rename_tab    "#[fg=#cccc32]{name}"
+                mode_rename_pane   "#[fg=#d65d0e]{name}"
+                mode_move          "#[fg=#8ec07c]{name}"
+                mode_prompt        "#[fg=#9de0c7]{name}"
+
+                tab_normal               "#[fg=#A89984]{name} ⟫ "
+                tab_normal_fullscreen    "{fullscreen_indicator}#[fg=#A89984] {name} ⟫ "
+                tab_normal_sync          "{sync_indicator}#[fg=#A89984] {name} ⟫ "
+                tab_active               "{floating_indicator}#[fg=#98971A,bold,italic] {name} ⟫ "
+                tab_active_fullscreen    "#[fg=#FE8019]{fullscreen_indicator}#[fg=#98971A,bold,italic] {name} ⟫ "
+                tab_active_sync          "#[fg=#458588]{sync_indicator}#[fg=#98971A,bold,italic] {name} ⟫ "
+                tab_sync_indicator       ""
+                tab_fullscreen_indicator "󰁌"
+                tab_floating_indicator   "󰏫"
+
+                datetime        "#[fg=#A89984,bold]{format}"
+                datetime_format "%A, %d %b"
+                datetime_timezone "America/Argentina/Ushuaia"
+            }
+        }
+        children
+        pane size=1 borderless=true  {
+          plugin location="zellij:status-bar"
+        }
+    }
+}

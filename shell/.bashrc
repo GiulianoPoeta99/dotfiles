@@ -10,8 +10,9 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(zoxide init --cmd cd bash)"
-
 source ~/.config/bash/alias/alias.sh
+
+eval "$(zoxide init --cmd cd bash)"
+eval "$(zellij setup --generate-auto-start bash)"
 
 eval "$(starship init bash)"

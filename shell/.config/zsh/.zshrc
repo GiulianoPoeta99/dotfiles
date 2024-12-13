@@ -48,13 +48,19 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:code:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:cp:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:mv:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:rm:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:cat:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:bat:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:l:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:la:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:ll:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
+zstyle ':fzf-tab:complete:lla:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
 # Keybindings ==========================================================================================================
 
@@ -106,6 +112,8 @@ eval "$(zoxide init --cmd cd zsh)"
 eval $(thefuck --alias)
 
 eval "$(atuin init zsh)"
+
+eval "$(zellij setup --generate-auto-start zsh)"
 
 # Prompt ===============================================================================================================
 

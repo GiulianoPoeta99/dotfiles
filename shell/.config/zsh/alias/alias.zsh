@@ -10,6 +10,7 @@ alias vs="code ."
 
 alias fzb='fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}"'
 alias fzn='nvim $(fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}")'
+alias fzc='code $(fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}")'
 
 # tree
 alias t='eza -T --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L '

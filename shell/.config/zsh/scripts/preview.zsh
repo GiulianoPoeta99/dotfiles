@@ -3,7 +3,7 @@ preview() {
     if [ -d "$1" ]; then
         eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos "$1"
     elif [ -f "$1" ]; then
-        bat --color=always "$1"
+        bat --color=always --theme=gruvbox-dark "$1"
     else
         echo "Entrada no válida: $1"
     fi
