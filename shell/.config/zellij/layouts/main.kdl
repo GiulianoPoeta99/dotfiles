@@ -16,7 +16,7 @@ layout {
         pane size=1 borderless=true {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "#[fg=#83A598,bold] #[fg=#B16286,bold]{session} #[fg=#83A598]∥{tabs}#[fg=#83A598] ⟨{mode}#[fg=#83A598]⟩"
-                format_right  "#[fg=#83A598]⟪{datetime}#[fg=#83A598]⟫"
+                format_right  "#[fg=#6B6259]help?: CTRL+Y #[fg=#83A598]⟪{datetime}#[fg=#83A598]⟫"
                 format_space  ""
 
                 border_enabled  "false"
@@ -57,8 +57,8 @@ layout {
             }
         }
         children
-        pane size=1 borderless=true  {
-          plugin location="zellij:status-bar"
-        }
+        // pane size=1 borderless=true  {
+        //   plugin location="zellij:status-bar"
+        // }
     }
 }

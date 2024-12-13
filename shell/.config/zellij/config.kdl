@@ -140,7 +140,14 @@ keybinds clear-defaults=true {
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
-        bind "Ctrl q" { Quit; }
+        // bind "Ctrl q" { Quit; }
+    }
+    shared_except "locked" {
+        bind "Ctrl q" {
+            LaunchOrFocusPlugin "zj-quit" {
+                floating true
+            }
+        }
     }
     shared_except "locked" "move" {
         bind "Ctrl h" { SwitchToMode "move"; }
@@ -303,6 +310,10 @@ plugins {
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
+    }
+    zj-quit location="file:~/.config/zellij/plugins/zj-quit.wasm" {
+        confirm_key "Enter"
+        cancel_key "Esc"
     }
 }
 
