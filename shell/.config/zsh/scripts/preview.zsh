@@ -1,7 +1,7 @@
 # Función para determinar si una entrada es un directorio o un archivo
 preview() {
     if [ -d "$1" ]; then
-        eza -al --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos "$1"
+        eza -aT --group-directories-first --icons=auto --color=always --color-scale --hyperlink --git --git-repos -L 1 "$1"
     elif [ -f "$1" ]; then
         bat --color=always --theme=gruvbox-dark "$1"
     else
