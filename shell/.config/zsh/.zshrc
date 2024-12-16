@@ -15,7 +15,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-zinit light svallory/zsh-shift-select-like-vscode
+# zinit light svallory/zsh-shift-select-like-vscode
 
 # OhMyZsh ==============================================================================================================
 
@@ -73,7 +73,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Shell integrations ===================================================================================================
 
-export FUNCNEST=1500 # para modo vi
+export FUNCNEST=1000 # para modo vi
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.config/nvm"
@@ -99,7 +99,7 @@ eval $(thefuck --alias)
 
 eval "$(atuin init zsh)"
 
-# eval "$(zellij setup --generate-auto-start zsh)"
+eval "$(zellij setup --generate-auto-start zsh)"
 
 # Keybindings ==========================================================================================================
 
