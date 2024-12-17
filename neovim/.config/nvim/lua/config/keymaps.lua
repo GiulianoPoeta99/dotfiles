@@ -4,4 +4,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- vim.keymap.set("n", "<C-s>", ":w<CR>") -- save file
+vim.keymap.set("n", "<C-s>", ":w<CR>") -- save file
+
