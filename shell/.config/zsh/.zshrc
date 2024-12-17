@@ -15,7 +15,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-# zinit light svallory/zsh-shift-select-like-vscode
+zinit light svallory/zsh-shift-select-like-vscode
 
 # OhMyZsh ==============================================================================================================
 
@@ -62,6 +62,22 @@ zstyle ':fzf-tab:complete:la:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zs
 zstyle ':fzf-tab:complete:ll:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:lla:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
+# Keybindings ==========================================================================================================
+
+bindkey -e
+
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-fordward
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+# bindkey '5~' backward-kill-word
+
+fg_widget() {
+    fg
+}
+zle -N fg_widget
+bindkey '^Z' fg_widget
+
 # Aliases ==============================================================================================================
 
 source ~/.config/zsh/alias/alias.zsh
@@ -72,8 +88,6 @@ export PATH="/usr/bin/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Shell integrations ===================================================================================================
-
-export FUNCNEST=1000 # para modo vi
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.config/nvm"
@@ -94,33 +108,9 @@ export CHROME_EXECUTABLE="brave"
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-# eval "$(zellij setup --generate-auto-start zsh)"
 eval $(thefuck --alias)
-
 eval "$(atuin init zsh)"
-
 eval "$(zellij setup --generate-auto-start zsh)"
-
-# Keybindings ==========================================================================================================
-
-bindkey -v
-
-zle-line-init() {
-    zle vi-cmd-mode  # Cambia al modo normal por defecto
-}
-zle -N zle-line-init
-
-# bindkey '^p' history-search-backward
-# bindkey '^n' history-search-fordward
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
-# bindkey '5~' backward-kill-word
-
-fg_widget() {
-    fg
-}
-zle -N fg_widget
-bindkey '^Z' fg_widget
 
 # Prompt ===============================================================================================================
 

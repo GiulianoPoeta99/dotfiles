@@ -19,9 +19,9 @@ disabled = false
 
 [character]
 format = "$symbol "
-success_symbol = "[⟨](bright-blue)[✏️](bold green)[⟩](bright-blue)[](bold bright-green)"
-error_symbol = "[⟨](bright-blue)[✏️](bold green)[⟩](bright-blue)[](bold bright-red)"
-vimcmd_symbol = "[](bold bright-cyan)"
+success_symbol = "[](bold bright-green)"
+error_symbol = "[](bold bright-red)"
+vimcmd_symbol = "[⟨](bright-blue)[✏️](bold green)[⟩](bright-blue)[](bold bright-green)"
 vimcmd_visual_symbol = "[⟨](bright-blue)[📚](bold yellow)[⟩](bright-blue)[](bold bright-yellow)"
 vimcmd_replace_symbol = "[⟨](bright-blue)[🖊️](bold purple)[⟩](bright-blue)[](bold bright-purple)"
 vimcmd_replace_one_symbol = "[⟨](bright-blue)[🔄](bold purple)[⟩](bright-blue)[](bold bright-purple)"
