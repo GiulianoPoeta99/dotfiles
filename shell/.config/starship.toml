@@ -21,10 +21,10 @@ disabled = false
 format = "$symbol "
 success_symbol = "[](bold bright-green)"
 error_symbol = "[](bold bright-red)"
-vimcmd_symbol = "[⟨](bright-blue)[✏️](bold green)[⟩](bright-blue)[](bold bright-green)"
-vimcmd_visual_symbol = "[⟨](bright-blue)[📚](bold yellow)[⟩](bright-blue)[](bold bright-yellow)"
-vimcmd_replace_symbol = "[⟨](bright-blue)[🖊️](bold purple)[⟩](bright-blue)[](bold bright-purple)"
-vimcmd_replace_one_symbol = "[⟨](bright-blue)[🔄](bold purple)[⟩](bright-blue)[](bold bright-purple)"
+vimcmd_symbol = "[](bold fg:#FE8019)"
+vimcmd_visual_symbol = "[<](bold bright-yellow)"
+vimcmd_replace_symbol = "[<](bold bright-purple)"
+vimcmd_replace_one_symbol = "[<](bold bright-cyan)"
 disabled = false
 
 [status]
@@ -132,7 +132,7 @@ disabled = false
 [cmd_duration]
 min_time = 2000
 format = " took [$duration]($style)"
-style = "blue bold"
+style = "bold fg:#D65D0E"
 show_milliseconds = false
 disabled = false
 show_notifications = false
