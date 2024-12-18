@@ -21,10 +21,10 @@ disabled = false
 format = "$symbol "
 success_symbol = "[](bold bright-green)"
 error_symbol = "[](bold bright-red)"
-vimcmd_symbol = "[](bold fg:#FE8019)"
-vimcmd_visual_symbol = "[<](bold bright-yellow)"
-vimcmd_replace_symbol = "[<](bold bright-purple)"
-vimcmd_replace_one_symbol = "[<](bold bright-cyan)"
+vimcmd_symbol = " [](bold fg:#FE8019)"
+vimcmd_visual_symbol = " [](bold bright-yellow)"
+vimcmd_replace_symbol = " [󰛔](bold bright-purple)"
+vimcmd_replace_one_symbol = " [󰛔](bold bright-cyan)"
 disabled = false
 
 [status]
