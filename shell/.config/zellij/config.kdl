@@ -140,12 +140,12 @@ keybinds clear-defaults=true {
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
-        // bind "Ctrl q" { Quit; }
-        bind "Ctrl q" {
-            LaunchOrFocusPlugin "zj-quit" {
-                floating true
-            }
-        }
+        bind "Ctrl q" { Quit; }
+        // bind "Ctrl q" {
+        //     LaunchOrFocusPlugin "zj-quit" {
+        //         floating true
+        //     }
+        // }
     }
     shared_except "locked" "move" {
         bind "Ctrl h" { SwitchToMode "move"; }
@@ -309,10 +309,10 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
-    zj-quit location="file:~/.config/zellij/plugins/zj-quit.wasm" {
-        confirm_key "Enter"
-        cancel_key "Esc"
-    }
+    // zj-quit location="file:~/.config/zellij/plugins/zj-quit.wasm" {
+    //     confirm_key "Enter"
+    //     cancel_key "Esc"
+    // }
 }
 
 // Plugins to load in the background when a new session starts
@@ -327,7 +327,7 @@ load_plugins {
 //   - true
 //   - false (Default)
  
-simplified_ui false
+simplified_ui true
  
 // Choose the theme that is specified in the themes section.
 // Default: default
@@ -337,7 +337,7 @@ theme "gruvbox-dark"
 // Choose the base input mode of zellij.
 // Default: normal
 
-default_mode "normal"
+default_mode "locked"
  
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL

@@ -15,7 +15,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-# zinit light svallory/zsh-shift-select-like-vscode
+zinit light svallory/zsh-shift-select-like-vscode
 
 # OhMyZsh ==============================================================================================================
 
@@ -62,6 +62,22 @@ zstyle ':fzf-tab:complete:la:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zs
 zstyle ':fzf-tab:complete:ll:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 zstyle ':fzf-tab:complete:lla:*' fzf-preview 'sh ~/.config/zsh/scripts/preview.zsh $realpath'
 
+# Keybindings ==========================================================================================================
+
+bindkey -e
+
+# bindkey '^p' history-search-backward
+# bindkey '^n' history-search-fordward
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+# bindkey '5~' backward-kill-word
+
+fg_widget() {
+    fg
+}
+zle -N fg_widget
+bindkey '^Z' fg_widget
+
 # Aliases ==============================================================================================================
 
 source ~/.config/zsh/alias/alias.zsh
@@ -72,8 +88,6 @@ export PATH="/usr/bin/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Shell integrations ===================================================================================================
-
-export FUNCNEST=1000 # para modo vi
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.config/nvm"
@@ -98,21 +112,13 @@ eval $(thefuck --alias)
 eval "$(atuin init zsh)"
 # eval "$(zellij setup --generate-auto-start zsh)"
 
-# Keybindings ==========================================================================================================
-
-bindkey -v
-
-# bindkey '^p' history-search-backward
-# bindkey '^n' history-search-fordward
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
-# bindkey '5~' backward-kill-word
-
-fg_widget() {
-    fg
-}
-zle -N fg_widget
-bindkey '^Z' fg_widget
+# if [ -z "$TMUX" ]; then
+#     tmux has-session -t default 2>/dev/null
+#     if [ $? != 0 ]; then
+#         tmux new-session -d -s default
+#     fi
+#     tmux attach -t default
+# fi
 
 # Prompt ===============================================================================================================
 
