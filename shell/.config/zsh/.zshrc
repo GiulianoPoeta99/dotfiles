@@ -112,13 +112,13 @@ eval $(thefuck --alias)
 eval "$(atuin init zsh)"
 # eval "$(zellij setup --generate-auto-start zsh)"
 
-# if [ -z "$TMUX" ]; then
-#     tmux has-session -t default 2>/dev/null
-#     if [ $? != 0 ]; then
-#         tmux new-session -d -s default
-#     fi
-#     tmux attach -t default
-# fi
+if [ -z "$TMUX" ]; then
+    tmux has-session -t default 2>/dev/null
+    if [ $? != 0 ]; then
+        tmuxinator start default
+    fi
+    tmux attach -t default
+fi
 
 # Prompt ===============================================================================================================
 
