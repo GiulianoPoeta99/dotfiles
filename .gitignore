@@ -3,3 +3,4 @@ shell/.config/atuin/history.db
 shell/.config/atuin/history.db-shm
 shell/.config/atuin/history.db-wal
 shell/.config/atuin/key
+shell/.config/tmux/plugins
