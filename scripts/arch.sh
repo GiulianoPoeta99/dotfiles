@@ -116,7 +116,7 @@ configure_shell() {
   print_colored "blue" "Configuring shell..."
 
   sudo pacman -S --noconfirm zsh fzf zoxide nushell tmux eza onefetch fastfetch bashtop xclip bat lazygit glow atuin
-  paru -S --noconfirm lazydocker
+  paru -S --noconfirm lazydocker tmuxinator
 
   atuin import auto
 

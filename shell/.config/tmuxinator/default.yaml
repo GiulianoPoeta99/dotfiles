@@ -1,0 +1,4 @@
+name: Default
+root: ~/
+windows:
+  - shell:
