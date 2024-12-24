@@ -85,12 +85,12 @@ $buf\
 $nats\
 [](fg:d_purple bg:bg3)\
 $docker_context\
+$kubernetes\
 [](fg:bg3 bg:bg2)\
 $aws\
 $azure\
 $gcloud\
 $openstack\
-$kubernetes\
 [](fg:bg2 bg:bg1)\
 $time\
 $cmd_duration\
@@ -294,7 +294,7 @@ disabled = false
 
 [git_status]
 style = "bg:d_aqua"
-format = '[\[$all_status$ahead_behind\] ]($style)'
+format = '([\[$all_status$ahead_behind\]]($style))'
 stashed = '\$'
 ahead = "⇡"
 behind = "⇣"
@@ -957,6 +957,21 @@ detect_extensions = []
 detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
 detect_folders = []
 
+[kubernetes]
+symbol = "☸ "
+format = '[ $symbol$context( \($namespace\)) ]($style)'
+style = "bg:bg3 fg:d_blue"
+disabled = false
+detect_extensions = []
+detect_files = []
+detect_folders = []
+detect_env_vars = []
+contexts = []
+
+[kubernetes.context_aliases]
+
+[kubernetes.user_aliases]
+
 [aws]
 format = '[ $symbol$profile \($region\) \[$duration\] ]($style)'
 symbol = " "
@@ -993,21 +1008,6 @@ format = '[ $symbol$cloud\($project\) ]($style)'
 symbol = " "
 style = "bg:bg2"
 disabled = false
-
-[kubernetes]
-symbol = "☸ "
-format = '[ $symbol$context( \($namespace\)) ]($style)'
-style = "bg:bg2 fg:d_blue"
-disabled = false
-detect_extensions = []
-detect_files = []
-detect_folders = []
-detect_env_vars = []
-contexts = []
-
-[kubernetes.context_aliases]
-
-[kubernetes.user_aliases]
 
 [time]
 disabled = true
