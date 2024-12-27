@@ -84,27 +84,7 @@ install_nerd_font() {
 
   print_colored "blue" "Installing Nerd Font: $font_name"
 
-  local font_dir="$HOME/.local/share/fonts/nerd-fonts"
-  mkdir -p "$font_dir"
-
-  cd "$font_dir"
-  cp "$font_zip" .
-  unzip -o "$(basename "$font_zip")"
-  rm "$(basename "$font_zip")"
-
-  fc-cache -fv
-
-  local font_pattern="${font_name//-/ }"
-  print_colored "blue" "Checking font installation for: $font_pattern"
-
-  if fc-list | grep -i "$font_pattern" >/dev/null; then
-    print_colored "green" "Font installed successfully"
-    fc-match "$font_pattern" -a
-  else
-    print_colored "yellow" "Warning: Font might not be properly installed"
-    print_colored "yellow" "Available similar fonts:"
-    fc-list | grep -i "nerd" | cut -d: -f2 | sort | uniq
-  fi
+  paru -S --noconfirm ttf-cascadia-codo-nerd
 
   print_colored "green" "Nerd Font configuration completed."
 }
@@ -197,6 +177,8 @@ configure_docker() {
 ###########################################
 configure_hyprland() {
   sudo pacman -S --noconfirm hyprland wofi waybar
+  paru -S --noconfirm hyprshot swaync hyprlock hypridle hyprpaper
+
 }
 
 ###########################################
