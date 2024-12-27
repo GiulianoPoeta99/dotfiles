@@ -94,7 +94,7 @@ $openstack\
 [](fg:bg2 bg:bg1)\
 $time\
 $cmd_duration\
-[ ](fg:bg1)\
+[](fg:bg1)\
 $line_break $sudo$character"""
 right_format = "$jobs$shlvl$battery$memory_usage"
 continuation_prompt = "[ >>](fg:bg3) "
@@ -1017,7 +1017,7 @@ format = '[[  $time ](fg:fg0 bg:bg2)]($style)'
 
 [cmd_duration]
 min_time = 2000
-format = "[ 󰔟 $duration ]($style)"
+format = "[ 󰔟 $duration]($style)"
 style = "fg:fg0 bg:bg1"
 show_milliseconds = false
 disabled = false
@@ -1047,13 +1047,13 @@ vimcmd_visual_symbol = '[](bold fg:l_yellow)'
 threshold = 1
 symbol_threshold = 1
 number_threshold = 1
-format = " [](fg:d_yellow)[ $symbol$number ]($style)[](fg:d_yellow)"
+format = " [](fg:d_yellow)[$symbol$number]($style)[](fg:d_yellow)"
 symbol = "✦ "
 style = "bold fg:fg0 bg:d_yellow"
 
 [shlvl]
 threshold = 2
-format = " [](fg:d_aqua)[ $symbol$shlvl ]($style)[](fg:d_aqua)"
+format = " [](fg:d_aqua)[$symbol$shlvl]($style)[](fg:d_aqua)"
 symbol = " "
 repeat = false
 repeat_offset = 0
@@ -1061,11 +1061,11 @@ style = "bold fg:fg0 bg:d_aqua"
 disabled = false
 
 [battery]
-full_symbol = "[](fg:l_blue)[ 󰁹$percentage ](bg:l_blue fg:fg0)[](fg:l_blue)"
-charging_symbol = "[](fg:l_green)[ 󰂄$percentage ](bg:l_green fg:fg0)[](fg:l_green)"
-discharging_symbol = "[](fg:l_orange)[ 󰂃$percentage ](bg:l_orange fg:fg0)[](fg:l_orange)"
-unknown_symbol = "[](fg:l_black)[ 󰁽$percentage ](bg:l_black fg:fg0)[](fg:l_black)"
-empty_symbol = "[](fg:d_red)[ 󰂎$percentage ](bg:d_red fg:fg0)[](fg:d_red)"
+full_symbol = "[](fg:l_blue)[󰁹$percentage](bg:l_blue fg:fg0)[](fg:l_blue)"
+charging_symbol = "[](fg:l_green)[󰂄$percentage](bg:l_green fg:fg0)[](fg:l_green)"
+discharging_symbol = "[](fg:l_orange)[󰂃$percentage](bg:l_orange fg:fg0)[](fg:l_orange)"
+unknown_symbol = "[](fg:l_black)[󰁽$percentage](bg:l_black fg:fg0)[](fg:l_black)"
+empty_symbol = "[](fg:d_red)[󰂎$percentage](bg:d_red fg:fg0)[](fg:d_red)"
 disabled = false
 format = " $symbol"
 

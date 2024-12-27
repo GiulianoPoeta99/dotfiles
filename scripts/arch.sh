@@ -84,7 +84,7 @@ install_nerd_font() {
 
   print_colored "blue" "Installing Nerd Font: $font_name"
 
-  paru -S --noconfirm ttf-cascadia-codo-nerd
+  paru -S --noconfirm ttf-cascadia-code-nerd
 
   print_colored "green" "Nerd Font configuration completed."
 }
@@ -177,8 +177,7 @@ configure_docker() {
 ###########################################
 configure_hyprland() {
   sudo pacman -S --noconfirm hyprland wofi waybar
-  paru -S --noconfirm hyprshot swaync hyprlock hypridle hyprpaper
-
+  paru -S --noconfirm hyprshot swaync hyprlock hypridle hyprpaper hyprpicker hyprpolkitagent
 }
 
 ###########################################
