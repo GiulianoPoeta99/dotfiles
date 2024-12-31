@@ -13,7 +13,6 @@ return {
   --   end,
   -- },
   {
-    -- THEME
     "sainnhe/gruvbox-material",
     lazy = false,
     priority = 1000,
@@ -26,6 +25,17 @@ return {
       vim.cmd.colorscheme("gruvbox-material")
     end,
   },
+  -- {
+  --   "sainnhe/everforest",
+  --   lazy = false,
+  --   priority = 1000, -- Asegura que se cargue antes que otros plugins
+  --   config = function()
+  --     vim.g.everforest_background = "hard" -- Opciones: 'soft', 'medium', 'hard'
+  --     vim.g.everforest_enable_italic = 1 -- Habilita las cursivas
+  --     vim.g.everforest_disable_italic_comment = 0 -- Deshabilita cursivas en comentarios
+  --     vim.cmd("colorscheme everforest")
+  --   end,
+  -- },
   {
     "snacks.nvim",
     opts = {

@@ -48,8 +48,10 @@ pls() {
 # bat
 if [ -x "$(command -v batcat)" ]; then
   alias bat='batcat --theme=gruvbox-dark'
+  alias cat='batcat --theme=gruvbox-dark'
 else
   alias bat='bat --theme=gruvbox-dark'
+  alias cat='bat --theme=gruvbox-dark'
 fi
 
 
