@@ -1,0 +1,33 @@
+font-family = "CaskaydiaCove Nerd Font"
+
+font-size = 11
+
+# ===================================================================================
+
+cursor-style = bar
+# cursor-text = '#458588'
+
+# ===================================================================================
+
+mouse-hide-while-typing
+gtk-titlebar = false
+title = "👻 - Ghostty"
+
+clipboard-read = "allow"
+clipboard-paste-protection = false
+
+window-decoration = false
+mouse-hide-while-typing = true
+window-padding-x = 0
+window-padding-y = 0
+macos-window-shadow = false
+
+# background-opacity = 0.95
+
+# ===================================================================================
+
+# theme = Everforest Dark - Hard
+theme = GruvboxDark
+
+adjust-cell-width = 0
+adjust-cell-height = 20%
