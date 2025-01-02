@@ -176,8 +176,8 @@ configure_docker() {
 # HYPRLAND CONFIG
 ###########################################
 configure_hyprland() {
-  sudo pacman -S --noconfirm hyprland wofi waybar
-  paru -S --noconfirm hyprshot swaync hyprlock hypridle hyprpaper hyprpicker hyprpolkitagent aylurs-gtk-shell
+  sudo pacman -S --noconfirm hyprland
+  paru -S --noconfirm hyprshot hyprlock hypridle hyprpaper hyprpicker hyprpolkitagent aylurs-gtk-shell
 }
 
 ###########################################

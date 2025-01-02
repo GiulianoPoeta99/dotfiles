@@ -1,35 +1,5 @@
 @use "sass:color";
-
-$bg0: #282828;
-$bg0_h: #1d2021;
-$bg0_s: #32302f;
-$bg1: #3c3836;
-$bg2: #504945;
-$bg3: #665c54;
-$bg4: #766f64;
-$fg0: #fbf1c7;
-$fg1: #ebdbb2;
-$fg2: #d5c4a1;
-$fg3: #bdae93;
-$fg4: #a89984;
-$d_black: #282828;
-$l_black: #928374;
-$d_red: #cc241d;
-$l_red: #fb4934;
-$d_green: #98971a;
-$l_green: #b8bb26;
-$d_yellow: #d79921;
-$l_yellow: #fabd2f;
-$d_blue: #458588;
-$l_blue: #83a598;
-$d_purple: #b16286;
-$l_purple: #d3899b;
-$d_aqua: #689d6a;
-$l_aqua: #8ec07c;
-$d_orange: #d65d0e;
-$l_orange: #fe8019;
-$d_white: #a89984;
-$l_white: #ebdbb2;
+@use '../themes/gruvbox-dark.scss';
 
 $font_family: CaskaydiaCove Nerd Font;
 
@@ -37,7 +7,7 @@ window.Bar {
     border: none;
     box-shadow: none;
     background-color: #00000000;
-    color: $fg1;
+    color: gruvbox-dark.$fg1;
     font-size: 1.1em;
     font-weight: bold;
     font-family: $font_family;
@@ -52,12 +22,12 @@ window.Bar {
             background-color: transparent;
 
             &:hover label {
-                background-color: color.adjust($d_green, $alpha: -0.7);
-                border-color: color.adjust($l_green, $alpha: -0.4);
+                background-color: color.adjust(gruvbox-dark.$d_green, $alpha: -0.7);
+                border-color: color.adjust(gruvbox-dark.$l_green, $alpha: -0.4);
             }
 
             &:active label {
-                background-color: color.adjust($l_green, $alpha: -0.8)
+                background-color: color.adjust(gruvbox-dark.$l_green, $alpha: -0.8)
             }
         }
 
@@ -70,31 +40,31 @@ window.Bar {
         }
 
         .focused label {
-            color: $fg1;
-            background-color: $l_green;
+            color: gruvbox-dark.$fg1;
+            background-color: gruvbox-dark.$l_green;
         }
     }
 
     .workspaces_container {
-      background-color: $bg4;
+      background-color: gruvbox-dark.$bg4;
       border: 1pt solid transparent;
       border-radius: 20px;
     }
 
     .focused_client_container {
-      background-color: $bg2;
+      background-color: gruvbox-dark.$bg2;
       border: 1pt solid transparent;
       border-radius: 20px;
     }
 
     .time_container {
-      background-color: $l_blue;
+      background-color: gruvbox-dark.$l_blue;
       border: 1pt solid transparent;
       border-radius: 20px;
     }
 
     .date_container {
-      background-color: $d_purple;
+      background-color: gruvbox-dark.$d_purple;
       border: 1pt solid transparent;
       border-radius: 20px;
     }
@@ -103,8 +73,12 @@ window.Bar {
       margin-right: 10px;
     }
 
-    .utilities_container {
-      background-color: $bg1;
+    .workspaces {
+      margin-left: 10px;
+    }
+
+    .utilities_container, .app_launcher_container {
+      background-color: gruvbox-dark.$bg1;
       border: 1pt solid transparent;
       border-radius: 20px;
 
@@ -112,8 +86,8 @@ window.Bar {
         all: unset;
 
         &:hover label {
-          background-color: color.adjust($l_white, $alpha: -0.7);
-          border-color: color.adjust($l_white, $alpha: -0.4);
+          background-color: color.adjust(gruvbox-dark.$l_white, $alpha: -0.7);
+          border-color: color.adjust(gruvbox-dark.$l_white, $alpha: -0.4);
         }
       }
 
@@ -183,3 +157,4 @@ window.Bar {
     //     }
     // }
 }
+

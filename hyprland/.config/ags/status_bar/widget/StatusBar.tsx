@@ -8,6 +8,13 @@ import Wp from "gi://AstalWp"
 import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
 
+function AppLauncher() {
+  return <box className="app_launcher_container">
+    <button className='app_launcher_button'>
+      <label>󰍜</label>
+    </button>
+  </box>
+}
 
 function Workspaces() {
     const hypr = Hyprland.get_default()
@@ -158,7 +165,7 @@ function Utilities() {
   </box>
 }
 
-export default function Bar(monitor: Gdk.Monitor) {
+export default function StatusBar(monitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
     return <window
@@ -173,6 +180,9 @@ export default function Bar(monitor: Gdk.Monitor) {
       >
         <centerbox>
             <box hexpand halign={Gtk.Align.START} className="bar_right">
+              <box className="app_launcher">
+                <AppLauncher />
+              </box>
               <box className="workspaces">
                 <Workspaces />
               </box>
