@@ -11,7 +11,7 @@ import { exec } from "astal/process"
 
 function AppLauncher() {
   return <box className="app_launcher_container">
-    <button className='app_launcher_button' onClicked={() => exec(['zsh', '-c', "ags toggle launcher -i launcher"])}>
+    <button className='app_launcher_button' onClicked={() => App.get_window("launcher")!.show()}>
       <label>󰍜</label>
     </button>
   </box>
