@@ -7,10 +7,11 @@ import Battery from "gi://AstalBattery"
 import Wp from "gi://AstalWp"
 import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
+import { exec } from "astal/process"
 
 function AppLauncher() {
   return <box className="app_launcher_container">
-    <button className='app_launcher_button'>
+    <button className='app_launcher_button' onClicked={() => exec(['zsh', '-c', "ags toggle launcher -i launcher"])}>
       <label>󰍜</label>
     </button>
   </box>

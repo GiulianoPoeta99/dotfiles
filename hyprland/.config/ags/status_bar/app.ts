@@ -6,7 +6,7 @@ import AppLauncher from "./widget/AppLauncher"
 
 App.start({
     css: style,
-    instanceName: "main",
+    instanceName: "status_bar",
     requestHandler(request, res) {
         print(request)
         res("ok")
