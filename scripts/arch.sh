@@ -156,6 +156,8 @@ configure_neovim() {
 
   cd $WORKING_DIR
   stow neovim
+
+  print_colored "green" "Neovim configuration completed."
 }
 
 ###########################################
@@ -170,14 +172,24 @@ configure_docker() {
   systemctl --user start docker-desktop
   systemctl --user enable docker-desktop
   sudo usermod -aG docker $USER
+
+  print_colored "green" "Docker configuration completed."
+
 }
 
 ###########################################
 # HYPRLAND CONFIG
 ###########################################
 configure_hyprland() {
+  print_colored "blue" "Configuring hyprland..."
+
   sudo pacman -S --noconfirm hyprland
-  paru -S --noconfirm hyprshot hyprlock hypridle hyprpaper hyprpicker hyprpolkitagent aylurs-gtk-shell eww
+  paru -S --noconfirm hyprshot hyprlock hypridle hyprpaper hyprpicker hyprpolkitagent aylurs-gtk-shell
+
+  cd $WORKING_DIR
+  stow hyprland
+
+  print_colored "green" "Hyprland configuration completed."
 }
 
 ###########################################

@@ -15,7 +15,6 @@ App.start({
     main: () => App.get_monitors().map(StatusBar)
 })
 
-
 App.start({
     instanceName: "launcher",
     css: style,
