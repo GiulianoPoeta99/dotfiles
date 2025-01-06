@@ -1,0 +1,38 @@
+@use "sass:color";
+@use "sass:string";
+
+@function gtkalpha($c, $a) {
+    @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+window {
+  all: unset;
+  background-color: gtkalpha(black, 0.3);
+}
+
+window > box {
+  margin: 10px;
+  padding: 6px;
+  box-shadow: 2px 3px 5px 0 gtkalpha(black, 0.6);
+  border-radius: 11px;
+  background-color: #181818;
+  color: white;
+  min-width: 200px;
+}
+
+box > label {
+  font-size: large;
+  margin: 6px;
+}
+
+label.title {
+  font-size: 1.4em;
+}
+
+.action {
+  color: gtkalpha(white, 0.8);
+}
+
+button {
+  margin: 6px;
+}
