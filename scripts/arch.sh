@@ -71,7 +71,7 @@ configure_repos() {
 }
 
 install_packages() {
-  sudo pacman -S --noconfirm bash-completion man-db man-pages podman discord spotify-launcher just tokei kondo sd telegram-desktop
+  sudo pacman -S --noconfirm bash-completion man-db man-pages podman discord spotify-launcher just tokei kondo sd telegram-desktop reflector
   paru -S --noconfirm brave-bin zen-browser-bin whatsapp-for-linux
 }
 
