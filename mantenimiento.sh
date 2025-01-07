@@ -6,8 +6,9 @@ paru -Syu --noconfirm
 sudo pacman -Scc
 paru -Scc
 
-sudo pacman -Rns $(pacman -Qdtq)
-paru -Rns $(paru -Qdtq)
+# Esto es borra muchos paquetes importantes
+# sudo pacman -Rns $(pacman -Qdtq)
+# paru -Rns $(paru -Qdtq)
 
 rm -rf ~/.cache/*
 
