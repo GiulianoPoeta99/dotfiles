@@ -2,29 +2,37 @@
 # SERVICES CONFIG
 ###########################################
 configure_services() {
+  print_colored "blue" "Configuring services..."
+
+  cd $HOME
+
   # Enable Bluetooth
+  print_colored "yellow" "Enable bluetooth..."
   sudo systemctl enable bluetooth
   sudo systemctl start bluetooth
 
   # Configure printing services
+  print_colored "yellow" "Enable prints..."
   sudo pacman -S cups gutenprint foomatic-db foomatic-db-engine foomatic-db-nonfree hplip splix cups-pdf
   sudo systemctl enable cups.service
   sudo systemctl start cups.service
   sudo pacman -S system-config-printer
   sudo gpasswd -a ${USER} sys
 
-  # Configure Avahi
   sudo pacman -S avahi nss-mdns
   sudo systemctl enable avahi-daemon
   sudo systemctl start avahi-daemon
 
-  yay -S evdi
-  yay -S displaylink
+  # print_colored "yellow" "Enable display link..."
+  # yay -S evdi
+  # yay -S displaylink
 
-  sudo modprobe evdi
+  # sudo modprobe evdi
 
-  sudo systemctl enable displaylink.service
-  sudo systemctl start displaylink.service
+  # sudo systemctl enable displaylink.service
+  # sudo systemctl start displaylink.service
+
+  print_colored "green" "Services configuration completed."
 }
 
 ###########################################
@@ -33,7 +41,7 @@ configure_services() {
 configure_git() {
   print_colored "blue" "Configuring Git..."
 
-  pacman -S --noconfirm git
+  cd $HOME
 
   # Configure Git settings
   GIT_NAME=$(get_input "Enter your Git username: ")
@@ -45,6 +53,8 @@ configure_git() {
   git config --global credential.helper store
   git config --global color.status.changed yellow
   git config --global init.defaultBranch "main"
+
+  print_colored "green" "Git configuration completed."
 }
 
 ###########################################
@@ -52,38 +62,47 @@ configure_git() {
 ###########################################
 configure_aur() {
   print_colored "yellow" "Installing AUR..."
+
   (
-    cd "$REPOS_DIR"
+    cd "~/.repositories"
     git clone https://aur.archlinux.org/paru-bin.git
     cd paru-bin
     makepkg -si
   )
+
+  print_colored "green" "AUR configuration completed."
 }
 
 configure_repos() {
   print_colored "yellow" "Adding package repository..."
+
   (
-    cd "$REPOS_DIR"
+    cd "~/.repositories"
     mkdir blackarch && cd blackarch
     curl -O https://blackarch.org/strap.sh
     chmod +x strap.sh && sudo ./strap.sh
   )
+
+  print_colored "green" "Repositories added."
 }
 
 install_packages() {
+  print_colored "yellow" "Installing packages..."
+
+  cd $HOME
   sudo pacman -S --noconfirm bash-completion man-db man-pages podman discord spotify-launcher just tokei kondo sd telegram-desktop reflector
   paru -S --noconfirm brave-bin zen-browser-bin whatsapp-for-linux
+
+  print_colored "green" "Packages installed."
 }
 
 ###########################################
 # NF CONFIG
 ###########################################
 install_nerd_font() {
-  local font_zip="$1"
-  local font_name=$(basename "$font_zip" .zip)
+  print_colored "blue" "Installing Nerd Font"
 
-  print_colored "blue" "Installing Nerd Font: $font_name"
-
+  cd $HOME
   paru -S --noconfirm ttf-cascadia-code-nerd
 
   print_colored "green" "Nerd Font configuration completed."
@@ -95,24 +114,26 @@ install_nerd_font() {
 configure_shell() {
   print_colored "blue" "Configuring shell..."
 
-  sudo pacman -S --noconfirm zsh fzf zoxide nushell tmux eza onefetch fastfetch bashtop xclip bat lazygit glow atuin thefuck
+  cd ~/.repositories/dotfiles
+
+  sudo pacman -S --noconfirm zsh fzf zoxide nushell tmux starship eza onefetch fastfetch bashtop xclip bat lazygit glow atuin thefuck
   paru -S --noconfirm lazydocker tmuxinator
 
   atuin import auto
 
   sudo rm -f /etc/zsh/zshenv
   (
-    cd $WORKING_DIR/shell
+    cd shell
     sudo stow -t /etc etc
     cd ..
-    stow --adopt shell
+    stow shell
   )
 
-  curl -sS https://starship.rs/install.sh | sh
+  # curl -sS https://starship.rs/install.sh | sh
 
   # Configure fonts if not using WSL
   if [[ "$WSL" =~ ^[Nn]$ ]]; then
-    install_nerd_font "$FONT_ZIP"
+    install_nerd_font
   else
     print_colored "blue" "Skipping font installation in WSL environment"
   fi
@@ -122,7 +143,7 @@ configure_shell() {
   mkdir -p ~/.local/state/zsh
   touch ~/.local/state/zsh/history
 
-  print_colored "green" "Zsh configuration completed."
+  print_colored "green" "Shell configuration completed."
 }
 
 ###########################################
@@ -132,29 +153,32 @@ configure_neovim() {
   print_colored "blue" "Configuring Neovim..."
 
   sudo pacman -S --noconfirm neovim ripgrep fd \
-    python-pip python-pipx \
+    python python-pip python-pipx \
     go \
     php composer \
-    jdk21-openjdk \
+    jdk23-openjdk maven gradle \
     lua luarocks \
-    ruby \
     zig \
     nim \
-    crystal shards
-  paru -S --noconfirm gleam
+    crystal shards \
+    dart \
+    pnpm yarn \
+    rustup
+  paru -S --noconfirm gleam flutter nvm rvm
 
   pipx install poetry
+  pipx install uv
 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  source $HOME/.cargo/env
+  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  # source $HOME/.cargo/env
   rustup update
 
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  # export NVM_DIR="$HOME/.nvm"
+  # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   nvm install 22
 
-  cd $WORKING_DIR
+  cd ~/.repositories/dotfiles
   stow neovim
 
   print_colored "green" "Neovim configuration completed."
@@ -164,8 +188,10 @@ configure_neovim() {
 # DOCKER CONFIG
 ###########################################
 configure_docker() {
-  cd ~
   print_colored "blue" "Configuring Docker..."
+
+  cd ~
+  
   wget https://download.docker.com/linux/static/stable/x86_64/docker-27.3.1.tgz -qO- | tar xvfz - docker/docker --strip-components=1
   mv ./docker /usr/local/bin
   sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
@@ -218,7 +244,7 @@ ParallelDownloads = 10
 ILoveCandy
 EOF
   )
-
+  echo "The next fragment was copy to clipboard"
   echo "$CONFIG_TEXT" | xclip -selection clipboard
 
   read -p "Press Enter to continue after editing pacman.conf"
@@ -227,6 +253,9 @@ EOF
   print_colored "yellow" "Fixing language..."
   local machine_lang=$(get_input "Is the machine configured in English? (Y/N): " "$VALID_YES_NO")
   if [[ "$machine_lang" =~ ^[Nn]$ ]]; then
+    echo "Uncomment the us.US_UTF8."
+    read -p "Press Enter to continue after editing locale.gen"
+
     sudo nano /etc/locale.gen
     sudo locale-gen
   fi
@@ -237,8 +266,10 @@ EOF
   configure_repos
   install_packages
 
-  print_colored "blue" "Installing stow..."
+  print_colored "yellow" "Installing stow..."
   sudo pacman -S --noconfirm stow
+  print_colored "green" "Stow installed."
+
   configure_shell
   configure_neovim
   configure_docker

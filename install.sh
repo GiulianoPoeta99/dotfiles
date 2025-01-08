@@ -5,17 +5,14 @@ set -e
 ###########################################
 # CONSTANTS AND GLOBAL VARIABLES
 ###########################################
-readonly VALID_DISTROS="arch|ubuntu"
+readonly VALID_DISTROS="arch|ubuntu|fedora|suse"
 readonly VALID_YES_NO="Y|N|y|n"
-readonly WORKING_DIR="$(pwd)"
 
-declare REPOS_DIR=""
 declare GIT_NAME=""
 declare GIT_EMAIL=""
 declare DISTRO=""
 declare WSL=""
 declare NIX=""
-declare FONT_ZIP=""
 
 ###########################################
 # UTILITY FUNCTIONS
@@ -57,19 +54,14 @@ command_exists() {
 init_script() {
   print_colored "blue" "Starting installation..."
 
-  # Get font file path
-  FONT_ZIP=$(get_input "Enter the path to the Nerd Font ZIP file: ")
-  if [[ ! -f "$FONT_ZIP" ]]; then
-    print_colored "red" "File does not exist: $FONT_ZIP"
-    exit 1
-  fi
+  cd $HOME
 
   # Get system configuration
   WSL=$(get_input "Are you using WSL? (Y/N): " "$VALID_YES_NO")
   DISTRO=$(get_input "Choose your distribution (arch/ubuntu/fedora/suse): " "$VALID_DISTROS")
-  REPOS_DIR=$(get_input "Enter the directory for repositories: ")
 
-  mkdir -p "$REPOS_DIR"
+  mkdir -p ~/.repositories
+  git clone https://github.com/GiulianoPoeta99/dotfiles.git ~/.repositories/dotfiles
 }
 
 ###########################################
