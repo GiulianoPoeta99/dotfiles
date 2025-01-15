@@ -1,6 +1,6 @@
-shell/.config/nushell/history.txt
-shell/.config/atuin/history.db
-shell/.config/atuin/history.db-shm
-shell/.config/atuin/history.db-wal
-shell/.config/atuin/key
-shell/.config/tmux/plugins
+.config/nushell/history.txt
+.config/atuin/history.db
+.config/atuin/history.db-shm
+.config/atuin/history.db-wal
+.config/atuin/key
+.config/tmux/plugins
