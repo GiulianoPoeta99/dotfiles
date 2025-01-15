@@ -43,9 +43,9 @@ install_all() {
 
   # AUR packages
   paru -S --noconfirm \
-    brave-bin zen-browser-bin whatsapp-for-linux \
+    brave-bin zen-browser-bin \ # whatsapp-for-linux \
     lazydocker tmuxinator ttf-cascadia-code-nerd \
-    gleam flutter rvm nvm code \
+    gleam flutter rvm nvm visual-studio-code-bin \
     hyprshot hyprlock hypridle hyprpaper hyprpicker \
     hyprpolkitagent aylurs-gtk-shell
 

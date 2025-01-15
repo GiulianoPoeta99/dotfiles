@@ -39,8 +39,9 @@ pac() {
   esac
 }
 
+alias yay='paru'
 
-yay() {
+aur() {
   case "$1" in
     install)
       shift

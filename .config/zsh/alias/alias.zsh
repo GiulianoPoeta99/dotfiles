@@ -62,3 +62,5 @@ source ~/.config/zsh/alias/docker.zsh
 source ~/.config/zsh/alias/git.zsh
 source ~/.config/zsh/alias/copy.zsh
 source ~/.config/zsh/alias/pacman.zsh
+source ~/.config/zsh/alias/ags/pulseaudio.zsh
+source ~/.config/zsh/alias/ags/power.zsh
