@@ -59,9 +59,6 @@ init_script() {
   # Get system configuration
   WSL=$(get_input "Are you using WSL? (Y/N): " "$VALID_YES_NO")
   DISTRO=$(get_input "Choose your distribution (arch/ubuntu/fedora/suse): " "$VALID_DISTROS")
-
-  mkdir -p ~/.repositories
-  git clone https://github.com/GiulianoPoeta99/dotfiles.git ~/.repositories/dotfiles
 }
 
 ###########################################
@@ -71,17 +68,17 @@ main() {
   init_script
 
   if [[ "$DISTRO" == "arch" ]]; then
-    source ./scripts/arch.sh
+    source ~/.repositories/dotfiles/scripts/arch.sh
     main_arch
   elif [[ "$DISTRO" == "ubuntu" ]]; then
-    source ./scripts/ubuntu.sh
-    main_ubuntu
+    source ~/.repositories/dotfiles/scripts/debian.sh
+    main_debian
   elif [[ "$DISTRO" == "fedora" ]]; then
-    source ./scripts/fedora.sh
-    main_ubuntu
+    source ~/.repositories/dotfiles/scripts/alma.sh
+    main_alma
   elif [[ "$DISTRO" == "suse" ]]; then
-    source ./scripts/suse.sh
-    main_ubuntu
+    source ~/.repositories/dotfiles/scripts/suse.sh
+    main_suse
   else
     print_colored "red" "Unsupported distribution. Exiting."
     exit 1
