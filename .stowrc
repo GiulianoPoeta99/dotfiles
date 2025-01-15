@@ -1,0 +1,9 @@
+--target=~/
+--ignore=.stowrc
+--ignore=.gitignore
+--ignore=install.sh
+--ignore=README.md
+--ignore=etc/*
+--ignore=old/*
+--ignore=scripts/*
+--ignore=starship_old.yaml

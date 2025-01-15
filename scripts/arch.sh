@@ -29,34 +29,23 @@ setup_aur() {
 install_all() {
   print_colored "blue" "Installing all packages and tools..."
 
-  # System packages
-  sudo pacman -S --noconfirm
-  # Base utilities
-  bash-completion man-db man-pages xclip stow reflector
-  # Development tools
-  neovim ripgrep fd
-  # Programming languages
-  python python-pip python-pipx \
-    go php composer jdk23-openjdk maven gradle \
-    lua luarocks zig nim crystal shards dart pnpm yarn
-  # Shell tools
-  zsh fzf zoxide nushell tmux starship eza onefetch \
-    fastfetch bashtop bat lazygit glow atuin thefuck
-  # Applications
-  podman discord spotify-launcher just tokei kondo sd telegram-desktop
-  # Printing support
-  cups gutenprint foomatic-db foomatic-db-engine \
-    foomatic-db-nonfree hplip splix cups-pdf system-config-printer
-  # Network services
-  avahi nss-mdns
-  # Window manager
-  hyprland
+  sudo pacman -S --noconfirm \
+    bash-completion man-db man-pages xclip stow reflector \
+    neovim ripgrep fd python python-pip python-pipx \
+    go rustup php composer jdk23-openjdk maven gradle \
+    lua luarocks zig nim crystal shards dart pnpm yarn \
+    zsh fzf zoxide nushell tmux starship eza onefetch \
+    fastfetch bashtop bat lazygit glow atuin thefuck \
+    podman discord spotify-launcher just tokei kondo \
+    sd telegram-desktop cups gutenprint foomatic-db \
+    foomatic-db-engine foomatic-db-nonfree hplip splix \
+    cups-pdf system-config-printer avahi nss-mdns hyprland
 
   # AUR packages
   paru -S --noconfirm \
     brave-bin zen-browser-bin whatsapp-for-linux \
     lazydocker tmuxinator ttf-cascadia-code-nerd \
-    gleam flutter rvm \
+    gleam flutter rvm nvm code \
     hyprshot hyprlock hypridle hyprpaper hyprpicker \
     hyprpolkitagent aylurs-gtk-shell
 
@@ -68,12 +57,12 @@ install_all() {
   pipx install uv
 
   # Rust
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   source $HOME/.cargo/env
   rustup update
 
   # Node.js
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   nvm install 22
