@@ -33,7 +33,7 @@ install_all() {
     bash-completion man-db man-pages xclip stow reflector \
     neovim ripgrep fd python python-pip python-pipx \
     go rustup php composer jdk23-openjdk maven gradle \
-    lua luarocks zig nim crystal shards dart pnpm yarn \
+    lua luarocks zig nim crystal shards dart pnpm yarn clang \
     zsh fzf zoxide nushell tmux starship eza onefetch \
     fastfetch bashtop bat lazygit glow atuin thefuck \
     podman discord spotify-launcher just tokei kondo \
