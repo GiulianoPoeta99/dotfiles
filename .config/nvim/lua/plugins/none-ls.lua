@@ -5,6 +5,9 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
+  -- dependencies = {
+  --   "nvimtools/none-ls-extras.nvim",
+  -- },
   opts = function(_, opts)
     -- opts variable is the default configuration table for the setup function call
     local null_ls = require "null-ls"
@@ -23,8 +26,12 @@ return {
       null_ls.builtins.formatting.golines,
       null_ls.builtins.formatting.black,
       null_ls.builtins.diagnostics.mypy,
-      null_ls.builtins.diagnostics.ruff,
+      -- null_ls.diagnostics.ruff,
       null_ls.builtins.formatting.clang_format,
+      null_ls.builtins.formatting.prettier,
+      -- null_ls.diagnostics.eslint,
+      null_ls.builtins.diagnostics.phpcs,
+      null_ls.builtins.formatting.phpcsfixer,
     })
   end,
 }

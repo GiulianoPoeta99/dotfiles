@@ -15,6 +15,12 @@ return {
         "gopls",
         "pyright",
         "clangd",
+        "ts_ls",
+        "astro",
+        "intelephense",
+        "zls",
+        "jdtls",
+        "kotlin_language_server",
       },
     },
   },
@@ -31,7 +37,14 @@ return {
         "mypy",
         "ruff",
         "black",
-        "clang-format",
+        "clang-format", -- cpp/java
+        "eslint_d",
+        "prettier",
+        "phpcs",
+        "php-cs-fixer",
+        "checkstyle",
+        "ktfmt",
+        "ktlint",
       },
     },
   },
@@ -40,9 +53,13 @@ return {
     -- overrides `require("mason-nvim-dap").setup(...)`
     opts = {
       ensure_installed = {
-        "codelldb", -- rust/cpp
+        "codelldb", -- rust/cpp/zig
         "go-debug-adapter",
         "debugpy",
+        "js-debug-adapter",
+        "php-debug-adapter",
+        "java-debug-adapter",
+        "kotlin-debug-adapter",
       },
     },
   },
