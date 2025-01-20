@@ -1,0 +1,12 @@
+name: sync_app
+root: /mnt/sda1/code/synclife/app/
+windows:
+  - editor:
+      panes:
+        - nvim
+  - logs:
+      layout: tiled
+      panes:
+        - pnpm run astro dev
+        - cd ../backend && poetry run fastapi dev src/main.py
+        - cd ../database && docker compose up dev

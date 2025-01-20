@@ -21,6 +21,7 @@ return {
       "cpp",
       "typescript",
       "astro",
+      "svelte",
       "css",
       "php",
       "zig",

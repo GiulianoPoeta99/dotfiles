@@ -1,4 +1,5 @@
 # generales
+alias q='exit'
 alias c='clear'
 alias rmrf="rm -rf"
 alias docker-la-puta-que-te-pario="sudo route add -net 192.168.0.0/24 gw 192.168.150.126"
