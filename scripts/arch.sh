@@ -37,9 +37,9 @@ install_all() {
     zsh fzf zoxide nushell tmux starship eza onefetch \
     fastfetch bashtop bat lazygit glow atuin thefuck \
     podman discord spotify-launcher just tokei kondo \
-    sd telegram-desktop cups gutenprint foomatic-db \
-    foomatic-db-engine foomatic-db-nonfree hplip splix \
-    cups-pdf system-config-printer avahi nss-mdns hyprland
+    sd cups gutenprint foomatic-db foomatic-db-engine \
+    foomatic-db-nonfree hplip splix cups-pdf \
+    system-config-printer avahi nss-mdns hyprland
 
   # AUR packages
   paru -S --noconfirm \
