@@ -18,7 +18,6 @@ App.start({
 App.start({
     instanceName: "launcher",
     css: style,
-    visible: false,
     main: AppLauncher,
 })
 
