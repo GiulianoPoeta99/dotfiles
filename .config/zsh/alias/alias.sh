@@ -57,11 +57,11 @@ fi
 
 
 # **********************************************************************************************************************
-source ~/.config/zsh/alias/update.zsh 
-source ~/.config/zsh/alias/nushell.zsh 
-source ~/.config/zsh/alias/docker.zsh
-source ~/.config/zsh/alias/git.zsh
-source ~/.config/zsh/alias/copy.zsh
-source ~/.config/zsh/alias/pacman.zsh
-source ~/.config/zsh/alias/ags/pulseaudio.zsh
-source ~/.config/zsh/alias/ags/power.zsh
+source ~/.config/zsh/alias/update.sh 
+source ~/.config/zsh/alias/nushell.sh 
+source ~/.config/zsh/alias/docker.sh
+source ~/.config/zsh/alias/git.sh
+source ~/.config/zsh/alias/copy.sh
+source ~/.config/zsh/alias/pacman.sh
+source ~/.config/zsh/alias/ags/pulseaudio.sh
+source ~/.config/zsh/alias/ags/power.sh
