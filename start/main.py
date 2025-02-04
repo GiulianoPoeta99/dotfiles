@@ -1,5 +1,3 @@
-import platform
-import subprocess
 from distros import DistroInstallerStrategy
 from distros import ArchInstaller
 
@@ -25,12 +23,16 @@ class Main:
                 else:
                     raise ValueError("Distribución no soportada")
         except FileNotFoundError:
-            raise RuntimeError("No se pudo determinar la distribución del sistema")
+            raise RuntimeError(
+                "No se pudo determinar la distribución del sistema"
+            )
 
     @staticmethod
     def exec():
         if Main.__detect_wsl():
-            print("Se detectó WSL. Algunas configuraciones pueden ser diferentes.")
+            print(
+                "Se detectó WSL. Algunas configuraciones pueden ser diferentes."
+            )
 
         distro = Main.__detect_distro()
 
