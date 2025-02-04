@@ -104,6 +104,9 @@ class ArchInstaller(DistroInstallerStrategy):
                             "tokei",
                             "kondo",
                             "sd",
+                            "atac",
+                            "sshs",
+                            "age"
                         ],
                         "env": ["podman"],
                     },
@@ -143,6 +146,7 @@ class ArchInstaller(DistroInstallerStrategy):
                     "tools": [
                         "lazydocker",
                         "tmuxinator",
+                        "portal-bin"
                     ],
                     "dart": ["flutter"],
                     "gleam": ["gleam"],
