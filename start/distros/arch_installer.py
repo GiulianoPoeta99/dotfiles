@@ -163,7 +163,8 @@ class ArchInstaller(DistroInstallerStrategy):
                     "hyprpaper",
                     "hyprpicker",
                     "hyprpolkitagent",
-                    "aylurs-gtk-shell",
+                    # "aylurs-gtk-shell",
+                    "eww"
                 ],
             },
         }
