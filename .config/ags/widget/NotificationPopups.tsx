@@ -98,7 +98,7 @@ export default function NotificationPopups(gdkmonitor: Gdk.Monitor) {
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | RIGHT}
-        marginTop={15}
+        marginTop={3}
         marginRight={735}
     >
         <box vertical>
