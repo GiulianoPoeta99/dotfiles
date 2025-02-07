@@ -1,6 +1,5 @@
 #!/bin/bash
 
-fecha=$(date +"Fecha: %A | %d.%m.%Y")
-hora=$(date +"Hora: %H:%M:%S")
+fecha=$(date +"%A %H:%M:%S | %d/%m/%Y")
 
-notify-send -i "dialog-information" -t 5000 -u low " " "\n$hora\n\n$fecha"
+dunstify -i "dialog-information" -t 5000 -u low "$fecha"

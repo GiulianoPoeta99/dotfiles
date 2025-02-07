@@ -2,12 +2,16 @@
 @use '../themes/gruvbox-dark.scss';
 
 $font_family: CaskaydiaCove Nerd Font;
+$bg: gruvbox-dark.$bg3;
+$fg: gruvbox-dark.$fg1;
+$button: gruvbox-dark.$d_blue;
+$button_border: gruvbox-dark.$l_blue;
 
 window.Bar {
     border: none;
     box-shadow: none;
     background-color: #00000000;
-    color: gruvbox-dark.$fg1;
+    color: $fg;
     font-size: 1.1em;
     font-weight: bold;
     font-family: $font_family;
@@ -22,12 +26,12 @@ window.Bar {
             background-color: transparent;
 
             &:hover label {
-                background-color: color.adjust(gruvbox-dark.$d_green, $alpha: -0.7);
-                border-color: color.adjust(gruvbox-dark.$l_green, $alpha: -0.4);
+                background-color: color.adjust($button, $alpha: -0.7);
+                border-color: color.adjust($button_border, $alpha: -0.4);
             }
 
             &:active label {
-                background-color: color.adjust(gruvbox-dark.$l_green, $alpha: -0.8)
+                background-color: color.adjust($button_border, $alpha: -0.8)
             }
         }
 
@@ -40,13 +44,13 @@ window.Bar {
         }
 
         .focused label {
-            color: gruvbox-dark.$fg1;
-            background-color: gruvbox-dark.$l_green;
+            color: $fg;
+            background-color: $button_border;
         }
     }
 
     .workspaces_container {
-      background-color: gruvbox-dark.$bg4;
+      background-color: $bg;
       border: 1pt solid transparent;
       border-radius: 20px;
     }

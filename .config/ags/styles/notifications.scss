@@ -1,13 +1,27 @@
 @use "sass:string";
+@use "sass:color";
+@use '../themes/gruvbox-dark.scss';
+
+$font_family: CaskaydiaCove Nerd Font;
 
 @function gtkalpha($c, $a) {
     @return string.unquote("alpha(#{$c},#{$a})");
 }
 
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
-$error: red;
+$fg: gruvbox-dark.$fg1;
+$bg: gruvbox-dark.$bg2;
+$error: gruvbox-dark.$l_red;
+$blue_button: gruvbox-dark.$l_blue;
+$blue_button_borer: gruvbox-dark.$d_blue;
+$green_button: gruvbox-dark.$l_green;
+$green_button_borer: gruvbox-dark.$d_green;
+$purple_button: gruvbox-dark.$l_purple;
+$purple_button_borer: gruvbox-dark.$d_purple;
+$orange_button: gruvbox-dark.$l_orange;
+$orange_button_borer: gruvbox-dark.$d_orange;
+$red_button: gruvbox-dark.$l_red;
+$red_button_borer: gruvbox-dark.$d_red;
+
 
 window.NotificationPopups {
     all: unset;
@@ -26,11 +40,11 @@ eventbox.Notification {
     // eventboxes can not take margins so we style its inner box instead
     >box {
         min-width: 400px;
-        border-radius: 13px;
-        background-color: $bg-color;
+        border-radius: 20px;
+        background-color: $bg;
         margin: .5rem 1rem .5rem 1rem;
         box-shadow: 2px 3px 8px 0 gtkalpha(black, .4);
-        border: 1pt solid gtkalpha($fg-color, .03);
+        border: 1pt solid gtkalpha($fg, .03);
     }
 
     &.critical>box {
@@ -40,7 +54,6 @@ eventbox.Notification {
 
             .app-name {
                 color: gtkalpha($error, .8);
-
             }
 
             .app-icon {
@@ -51,14 +64,15 @@ eventbox.Notification {
 
     .header {
         padding: .5rem;
-        color: gtkalpha($fg-color, 0.5);
+        color: $fg;
 
         .app-icon {
             margin: 0 .4rem;
+            color: gtkalpha($fg, 0.6);
         }
 
         .app-name {
-            margin-right: .3rem;
+            margin-right: 5rem;
             font-weight: bold;
 
             &:first-child {
@@ -68,18 +82,36 @@ eventbox.Notification {
 
         .time {
             margin: 0 .4rem;
+            color: gtkalpha($fg, 0.3);
         }
 
         button {
-            padding: .2rem;
+            all: unset;
+            background-color: $red_button;
+            padding: .2rem 0.5rem;
             min-width: 0;
             min-height: 0;
+            color: $fg;
+            font-family: $font_family;
+            font-weight: bold;
+            border-radius: 10px;
+            border: 1pt solid transparent;
+            transition: background-color 200ms, border-color 200ms;
+    
+            &:hover {
+                background-color: color.adjust($red_button, $alpha: -0.4);
+                border-color: color.adjust($red_button_borer, $alpha: -0.2);
+            }
+    
+            &:active {
+                background-color: color.adjust($red_button_borer, $alpha: -0.6);
+            }
         }
     }
 
     separator {
         margin: 0 .4rem;
-        background-color: gtkalpha($fg-color, .1);
+        background-color: gtkalpha($fg, 0.1);
     }
 
     .content {
@@ -88,17 +120,17 @@ eventbox.Notification {
 
         .summary {
             font-size: 1.2em;
-            color: $fg-color;
+            color: $fg;
         }
 
         .body {
-            color: gtkalpha($fg-color, 0.8);
+            color: gtkalpha($fg, 0.8);
         }
 
         .image {
-            border: 1px solid gtkalpha($fg-color, .02);
+            border: 1px solid gtkalpha($fg, .02);
             margin-right: .5rem;
-            border-radius: 9px;
+            border-radius: 10px;
             min-width: 100px;
             min-height: 100px;
             background-size: cover;
@@ -111,7 +143,79 @@ eventbox.Notification {
         margin-top: 0;
 
         button {
+            all: unset;
             margin: 0 .3rem;
+            color: $fg;
+            font-family: $font_family;
+            font-weight: bold;
+            border-radius: 10px;
+            border: 1pt solid transparent;
+            transition: background-color 200ms, border-color 200ms;
+            
+            &:nth-child(1) {
+                background-color: $blue_button;
+
+                &:hover {
+                    background-color: color.adjust($blue_button, $alpha: -0.4);
+                    border-color: color.adjust($blue_button_borer, $alpha: -0.2);
+                }
+        
+                &:active {
+                    background-color: color.adjust($blue_button_borer, $alpha: -0.6);
+                }
+            }
+            
+            &:nth-child(2) {
+                background-color: $green_button;
+                
+                &:hover {
+                    background-color: color.adjust($green_button, $alpha: -0.4);
+                    border-color: color.adjust($green_button_borer, $alpha: -0.2);
+                }
+        
+                &:active {
+                    background-color: color.adjust($green_button_borer, $alpha: -0.6);
+                }
+            }
+
+            &:nth-child(3) {
+                background-color: $purple_button;
+
+                &:hover {
+                    background-color: color.adjust($purple_button, $alpha: -0.4);
+                    border-color: color.adjust($purple_button_borer, $alpha: -0.2);
+                }
+        
+                &:active {
+                    background-color: color.adjust($purple_button_borer, $alpha: -0.6);
+                }
+            }
+
+            &:nth-child(4) {
+                background-color: $orange_button;
+
+                &:hover {
+                    background-color: color.adjust($orange_button, $alpha: -0.4);
+                    border-color: color.adjust($orange_button_borer, $alpha: -0.2);
+                }
+        
+                &:active {
+                    background-color: color.adjust($orange_button_borer, $alpha: -0.6);
+                }
+            }
+
+            &:nth-child(5) {
+                background-color: $red_button;
+
+                &:hover {
+                    background-color: color.adjust($red_button, $alpha: -0.4);
+                    border-color: color.adjust($red_button_borer, $alpha: -0.2);
+                }
+        
+                &:active {
+                    background-color: color.adjust($red_button_borer, $alpha: -0.6);
+                }
+            }
 
             &:first-child {
                 margin-left: 0;
@@ -120,6 +224,15 @@ eventbox.Notification {
             &:last-child {
                 margin-right: 0;
             }
+        }
+
+
+        label {
+            transition: 200ms;
+            padding: 0 8px;
+            margin: 0px;
+            border-radius: 10px;
+            border: 1pt solid transparent;
         }
     }
 }
