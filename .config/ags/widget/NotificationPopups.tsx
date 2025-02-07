@@ -98,7 +98,7 @@ export default function NotificationPopups(gdkmonitor: Gdk.Monitor) {
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.IGNORE} // tengo que ver que onda esto
         anchor={TOP | CENTER}
-        marginTop={20}
+        marginTop={19}
     >
         <box vertical>
             {bind(notifs)}
