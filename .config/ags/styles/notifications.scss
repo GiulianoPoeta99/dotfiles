@@ -37,7 +37,6 @@ eventbox.Notification {
         margin-bottom: 1rem;
     }
 
-    // eventboxes can not take margins so we style its inner box instead
     >box {
         min-width: 400px;
         border-radius: 20px;
