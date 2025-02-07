@@ -33,8 +33,6 @@ export default function StatusBar(monitor: Gdk.Monitor) {
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | LEFT | RIGHT}
         marginTop={8}
-        marginRight={15}
-        marginLeft={15}
         marginBottom={0}
       >
         <centerbox>
