@@ -82,8 +82,7 @@ class ArchInstaller(DistroInstallerStrategy):
                     "man-pages",
                     "xclip",
                     "stow",
-                    "glow",
-                    "dunst"
+                    "glow"
                 ],
                 "dev": {
                     "tools": {
