@@ -2,7 +2,7 @@ import Apps from "gi://AstalApps"
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { Variable } from "astal"
 
-const MAX_ITEMS = 8
+const MAX_ITEMS = 11
 
 function hide() {
     App.get_window("launcher")!.hide()
@@ -48,6 +48,7 @@ export default function AppLauncher() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
+        marginTop={5}
         application={App}
         onShow={() => text.set("")}
         onKeyPressEvent={function (self, event: Gdk.Event) {

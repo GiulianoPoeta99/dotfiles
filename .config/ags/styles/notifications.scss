@@ -8,19 +8,20 @@ $font_family: CaskaydiaCove Nerd Font;
     @return string.unquote("alpha(#{$c},#{$a})");
 }
 
+$font_family: CaskaydiaCove Nerd Font;
 $fg: gruvbox-dark.$fg1;
 $bg: gruvbox-dark.$bg2;
 $error: gruvbox-dark.$l_red;
 $blue_button: gruvbox-dark.$l_blue;
-$blue_button_borer: gruvbox-dark.$d_blue;
+$blue_button_border: gruvbox-dark.$d_blue;
 $green_button: gruvbox-dark.$l_green;
-$green_button_borer: gruvbox-dark.$d_green;
+$green_button_border: gruvbox-dark.$d_green;
 $purple_button: gruvbox-dark.$l_purple;
-$purple_button_borer: gruvbox-dark.$d_purple;
+$purple_button_border: gruvbox-dark.$d_purple;
 $orange_button: gruvbox-dark.$l_orange;
-$orange_button_borer: gruvbox-dark.$d_orange;
+$orange_button_border: gruvbox-dark.$d_orange;
 $red_button: gruvbox-dark.$l_red;
-$red_button_borer: gruvbox-dark.$d_red;
+$red_button_border: gruvbox-dark.$d_red;
 
 
 window.NotificationPopups {
@@ -28,6 +29,7 @@ window.NotificationPopups {
 }
 
 eventbox.Notification {
+    font-family: $font_family;
 
     &:first-child>box {
         margin-top: 1rem;
@@ -99,11 +101,12 @@ eventbox.Notification {
     
             &:hover {
                 background-color: color.adjust($red_button, $alpha: -0.4);
-                border-color: color.adjust($red_button_borer, $alpha: -0.2);
+                // border-color: color.adjust($red_button_border, $alpha: -0.2);
             }
     
             &:active {
-                background-color: color.adjust($red_button_borer, $alpha: -0.6);
+                // background-color: color.adjust($red_button_border, $alpha: -0.6);
+                background-color: $red_button_border;
             }
         }
     }
@@ -156,11 +159,12 @@ eventbox.Notification {
 
                 &:hover {
                     background-color: color.adjust($blue_button, $alpha: -0.4);
-                    border-color: color.adjust($blue_button_borer, $alpha: -0.2);
+                    border-color: color.adjust($blue_button_border, $alpha: -0.2);
                 }
         
                 &:active {
-                    background-color: color.adjust($blue_button_borer, $alpha: -0.6);
+                    // background-color: color.adjust($blue_button_border, $alpha: -0.6);
+                    background-color: $blue_button_border;
                 }
             }
             
@@ -169,11 +173,12 @@ eventbox.Notification {
                 
                 &:hover {
                     background-color: color.adjust($green_button, $alpha: -0.4);
-                    border-color: color.adjust($green_button_borer, $alpha: -0.2);
+                    border-color: color.adjust($green_button_border, $alpha: -0.2);
                 }
         
                 &:active {
-                    background-color: color.adjust($green_button_borer, $alpha: -0.6);
+                    // background-color: color.adjust($green_button_border, $alpha: -0.6);
+                    background-color: $green_button_border;
                 }
             }
 
@@ -182,11 +187,12 @@ eventbox.Notification {
 
                 &:hover {
                     background-color: color.adjust($purple_button, $alpha: -0.4);
-                    border-color: color.adjust($purple_button_borer, $alpha: -0.2);
+                    border-color: color.adjust($purple_button_border, $alpha: -0.2);
                 }
         
                 &:active {
-                    background-color: color.adjust($purple_button_borer, $alpha: -0.6);
+                    // background-color: color.adjust($purple_button_border, $alpha: -0.6);
+                    background-color: $purple_button_border;
                 }
             }
 
@@ -195,11 +201,12 @@ eventbox.Notification {
 
                 &:hover {
                     background-color: color.adjust($orange_button, $alpha: -0.4);
-                    border-color: color.adjust($orange_button_borer, $alpha: -0.2);
+                    border-color: color.adjust($orange_button_border, $alpha: -0.2);
                 }
         
                 &:active {
-                    background-color: color.adjust($orange_button_borer, $alpha: -0.6);
+                    // background-color: color.adjust($orange_button_border, $alpha: -0.6);
+                    background-color: $orange_button_border;
                 }
             }
 
@@ -208,11 +215,12 @@ eventbox.Notification {
 
                 &:hover {
                     background-color: color.adjust($red_button, $alpha: -0.4);
-                    border-color: color.adjust($red_button_borer, $alpha: -0.2);
+                    border-color: color.adjust($red_button_border, $alpha: -0.2);
                 }
         
                 &:active {
-                    background-color: color.adjust($red_button_borer, $alpha: -0.6);
+                    // background-color: color.adjust($red_button_border, $alpha: -0.6);
+                    background-color: $red_button_border;
                 }
             }
 

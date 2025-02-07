@@ -26,12 +26,13 @@ window.Bar {
             background-color: transparent;
 
             &:hover label {
-                background-color: color.adjust($button, $alpha: -0.7);
-                border-color: color.adjust($button_border, $alpha: -0.4);
+                background-color: color.adjust($button, $alpha: -0.4);
+                // border-color: color.adjust($button_border, $alpha: -0.2);
             }
 
             &:active label {
-                background-color: color.adjust($button_border, $alpha: -0.8)
+                // background-color: color.adjust($button_border, $alpha: -0.6);
+                background-color: $button_border;
             }
         }
 
