@@ -832,10 +832,6 @@ $env.config = {
 #     __zoxide_zi => $zoxide_completer
 # }
 
-source ~/.local/share/zoxide/init.nu
-source ~/.local/share/atuin/init.nu
-source ~/.config/nushell/alias/alias.nu
-
 use ~/.cache/starship/init.nu
 
 
