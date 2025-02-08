@@ -1,9 +1,18 @@
 @use "sass:color";
 @use "sass:string";
+@use '../../themes/gruvbox-dark.scss';
 
 @function gtkalpha($c, $a) {
     @return string.unquote("alpha(#{$c},#{$a})");
 }
+
+$font_family: CaskaydiaCove Nerd Font;
+$fg: gruvbox-dark.$fg1;
+$bg: gruvbox-dark.$bg2;
+$green_button: gruvbox-dark.$l_green;
+$green_button_border: gruvbox-dark.$d_green;
+$red_button: gruvbox-dark.$l_red;
+$red_button_border: gruvbox-dark.$d_red;
 
 window {
   all: unset;
@@ -13,26 +22,71 @@ window {
 window > box {
   margin: 10px;
   padding: 6px;
-  box-shadow: 2px 3px 5px 0 gtkalpha(black, 0.6);
-  border-radius: 11px;
-  background-color: #181818;
-  color: white;
+  box-shadow: 2px 3px 8px 0 gtkalpha(black, 0.4);
+  border-radius: 20px;
+  background-color: $bg;
+  color: $fg;
   min-width: 200px;
+  font-family: $font_family;
 }
 
 box > label {
+  color: $fg;
   font-size: large;
   margin: 6px;
 }
 
 label.title {
+  color: $fg;
   font-size: 1.4em;
 }
 
 .action {
-  color: gtkalpha(white, 0.8);
+  color: $fg;
 }
 
-button {
+button.yes {
+  all: unset;
   margin: 6px;
+  color: $fg;
+  min-width: 0;
+  min-height: 0;
+  padding: .5rem;
+  background-color: $green_button;
+  border-radius: 20px;
+  border: 1pt solid transparent;
+  transition: background-color 200ms, border-color 200ms;
+
+  &:hover, &:focus {
+    background-color: color.adjust($green_button, $alpha: -0.4);
+    border-color: color.adjust($green_button_border, $alpha: -0.2);
+  }
+
+  &:active {
+      // background-color: color.adjust($green_button_border, $alpha: -0.6);
+      background-color: $green_button_border;
+  }
+}
+
+button.no {
+  all: unset;
+  margin: 6px;
+  color: $fg;
+  min-width: 0;
+  min-height: 0;
+  padding: .5rem;
+  background-color: $red_button;
+  border-radius: 20px;
+  border: 1pt solid transparent;
+  transition: background-color 200ms, border-color 200ms;
+
+  &:hover, &:focus {
+    background-color: color.adjust($red_button, $alpha: -0.4);
+    border-color: color.adjust($red_button_border, $alpha: -0.2);
+  }
+
+  &:active {
+      // background-color: color.adjust($red_button_border, $alpha: -0.6);
+      background-color: $red_button_border;
+  }
 }

@@ -48,14 +48,13 @@ export default function AppLauncher() {
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
-        marginTop={5}
         application={App}
         onShow={() => text.set("")}
         onKeyPressEvent={function (self, event: Gdk.Event) {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
                 self.hide()
         }}>
-        <box>
+        <box marginTop={5}>
             <eventbox widthRequest={4000} expand onClick={hide} />
             <box hexpand={false} vertical>
                 <eventbox heightRequest={100} onClick={hide} />

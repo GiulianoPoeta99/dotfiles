@@ -29,13 +29,13 @@ export default function Dialog(action: String) {
     anchor={TOP | BOTTOM | LEFT | RIGHT}
   >
     <box halign={CENTER} valign={CENTER} vertical>
-       <label className="title" label="Are you sure you want to do" />
+       <label className="title" label="Are you sure you want to do a" />
        <label className="action" label={`${action}?`} />
        <box homogeneous>
-         <button onClicked={yes}>
+         <button className="yes" onClicked={yes}>
            Yes
          </button>
-         <button onClicked={no}>
+         <button className="no" onClicked={no}>
            No
          </button>
        </box>
