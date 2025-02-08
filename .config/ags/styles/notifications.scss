@@ -155,7 +155,7 @@ eventbox.Notification {
             transition: background-color 200ms, border-color 200ms;
             
             &:nth-child(1) {
-                background-color: color.adjust($blue_button, $alpha: -0.4);
+                background-color: color.adjust($blue_button, $alpha: -0.45);
 
                 &:hover, &:focus {
                     background-color: $blue_button_border;
@@ -168,7 +168,7 @@ eventbox.Notification {
             }
             
             &:nth-child(2) {
-                background-color: color.adjust($green_button, $alpha: -0.4);
+                background-color: color.adjust($green_button, $alpha: -0.45);
                 
                 &:hover, &:focus {
                     background-color: $green_button_border;
@@ -181,7 +181,7 @@ eventbox.Notification {
             }
 
             &:nth-child(3) {
-                background-color: color.adjust($purple_button, $alpha: -0.4);
+                background-color: color.adjust($purple_button, $alpha: -0.45);
 
                 &:hover, &:focus {
                     background-color: $purple_button_border;
@@ -194,7 +194,7 @@ eventbox.Notification {
             }
 
             &:nth-child(4) {
-                background-color: color.adjust($orange_button, $alpha: -0.4);
+                background-color: color.adjust($orange_button, $alpha: -0.45);
 
                 &:hover, &:focus {
                     background-color: $orange_button_border;
@@ -207,7 +207,7 @@ eventbox.Notification {
             }
 
             &:nth-child(5) {
-                background-color: color.adjust($red_button, $alpha: -0.4);
+                background-color: color.adjust($red_button, $alpha: -0.45);
 
                 &:hover, &:focus {
                     background-color: $red_button_border;
