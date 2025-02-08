@@ -64,4 +64,3 @@ source ~/.config/zsh/alias/git.sh
 source ~/.config/zsh/alias/copy.sh
 source ~/.config/zsh/alias/pacman.sh
 source ~/.config/zsh/alias/ags/pulseaudio.sh
-source ~/.config/zsh/alias/ags/power.sh
