@@ -52,19 +52,18 @@ button.yes {
   min-width: 0;
   min-height: 0;
   padding: .5rem;
-  background-color: $green_button;
+  background-color: color.adjust($green_button, $alpha: -0.4);
   border-radius: 20px;
   border: 1pt solid transparent;
   transition: background-color 200ms, border-color 200ms;
 
   &:hover, &:focus {
-    background-color: color.adjust($green_button, $alpha: -0.4);
-    border-color: color.adjust($green_button_border, $alpha: -0.2);
+    background-color: $green_button_border;
   }
 
   &:active {
-      // background-color: color.adjust($green_button_border, $alpha: -0.6);
-      background-color: $green_button_border;
+      background-color: color.adjust($green_button, $alpha: -0.4);
+      border-color: color.adjust($green_button_border, $alpha: -0.2);
   }
 }
 
@@ -75,18 +74,17 @@ button.no {
   min-width: 0;
   min-height: 0;
   padding: .5rem;
-  background-color: $red_button;
+  background-color: color.adjust($red_button, $alpha: -0.4);
   border-radius: 20px;
   border: 1pt solid transparent;
   transition: background-color 200ms, border-color 200ms;
 
   &:hover, &:focus {
+    background-color: $red_button_border;
+  }
+  
+  &:active {
     background-color: color.adjust($red_button, $alpha: -0.4);
     border-color: color.adjust($red_button_border, $alpha: -0.2);
-  }
-
-  &:active {
-      // background-color: color.adjust($red_button_border, $alpha: -0.6);
-      background-color: $red_button_border;
   }
 }

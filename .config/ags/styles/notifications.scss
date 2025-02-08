@@ -155,72 +155,67 @@ eventbox.Notification {
             transition: background-color 200ms, border-color 200ms;
             
             &:nth-child(1) {
-                background-color: $blue_button;
+                background-color: color.adjust($blue_button, $alpha: -0.4);
 
-                &:hover {
+                &:hover, &:focus {
+                    background-color: $blue_button_border;
+                }
+                
+                &:active {
                     background-color: color.adjust($blue_button, $alpha: -0.4);
                     border-color: color.adjust($blue_button_border, $alpha: -0.2);
-                }
-        
-                &:active {
-                    // background-color: color.adjust($blue_button_border, $alpha: -0.6);
-                    background-color: $blue_button_border;
                 }
             }
             
             &:nth-child(2) {
-                background-color: $green_button;
+                background-color: color.adjust($green_button, $alpha: -0.4);
                 
-                &:hover {
+                &:hover, &:focus {
+                    background-color: $green_button_border;
+                }
+                
+                &:active {
                     background-color: color.adjust($green_button, $alpha: -0.4);
                     border-color: color.adjust($green_button_border, $alpha: -0.2);
-                }
-        
-                &:active {
-                    // background-color: color.adjust($green_button_border, $alpha: -0.6);
-                    background-color: $green_button_border;
                 }
             }
 
             &:nth-child(3) {
-                background-color: $purple_button;
+                background-color: color.adjust($purple_button, $alpha: -0.4);
 
-                &:hover {
+                &:hover, &:focus {
+                    background-color: $purple_button_border;
+                }
+                
+                &:active {
                     background-color: color.adjust($purple_button, $alpha: -0.4);
                     border-color: color.adjust($purple_button_border, $alpha: -0.2);
-                }
-        
-                &:active {
-                    // background-color: color.adjust($purple_button_border, $alpha: -0.6);
-                    background-color: $purple_button_border;
                 }
             }
 
             &:nth-child(4) {
-                background-color: $orange_button;
+                background-color: color.adjust($orange_button, $alpha: -0.4);
 
-                &:hover {
+                &:hover, &:focus {
+                    background-color: $orange_button_border;
+                }
+                
+                &:active {
                     background-color: color.adjust($orange_button, $alpha: -0.4);
                     border-color: color.adjust($orange_button_border, $alpha: -0.2);
-                }
-        
-                &:active {
-                    // background-color: color.adjust($orange_button_border, $alpha: -0.6);
-                    background-color: $orange_button_border;
                 }
             }
 
             &:nth-child(5) {
-                background-color: $red_button;
+                background-color: color.adjust($red_button, $alpha: -0.4);
 
-                &:hover {
+                &:hover, &:focus {
+                    background-color: $red_button_border;
+                }
+                
+                &:active {
                     background-color: color.adjust($red_button, $alpha: -0.4);
                     border-color: color.adjust($red_button_border, $alpha: -0.2);
-                }
-        
-                &:active {
-                    // background-color: color.adjust($red_button_border, $alpha: -0.6);
-                    background-color: $red_button_border;
                 }
             }
 
