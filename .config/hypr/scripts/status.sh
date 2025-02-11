@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hora=$(date +"%A %H:%M:%S | %d/%m/%Y")
+hora=$(date +"%A %H:%M:%S")
 fecha=$(date +"%d/%m/%Y")
 bateria=$(upower -i $(upower -e | grep 'BAT') | grep -E "percentage" | awk '{print $2}')
 
