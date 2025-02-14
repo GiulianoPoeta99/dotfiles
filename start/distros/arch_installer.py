@@ -155,6 +155,7 @@ class ArchInstaller(DistroInstallerStrategy):
                 "apps": [
                     "brave-bin, zen-browser-bin",
                     "visual-studio-code-bin",
+                    "cursor-bin"
                 ],
                 "desktop": [
                     "hyprshot",

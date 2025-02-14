@@ -8,6 +8,7 @@ alias of="onefetch"
 alias tk="tokei"
 alias n="nvim"
 alias vs="code ."
+alias cvs="cursor ."
 
 alias fzb='fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}"'
 alias fzn='nvim $(fzf --preview "bat --theme=gruvbox-dark --color=always --style=numbers --line-range=:500 {}")'
