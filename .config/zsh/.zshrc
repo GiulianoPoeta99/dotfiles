@@ -86,6 +86,7 @@ source ~/.config/zsh/alias/alias.sh
 
 export PATH="/usr/bin/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # Shell integrations ===================================================================================================
 
