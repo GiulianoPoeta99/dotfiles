@@ -3,16 +3,17 @@ root: /mnt/sda1/code/synclife/backend
 windows:
   - editor:
       panes:
-        - source $(poetry env info --path)/bin/activate && nvim
-  - db-manager:
-      panes:
-        - nvim -c "Dbee open"
-  - api:
-      panes:
-        - atac
-  - logs:
-      layout: tiled
-      panes:
-        - source $(poetry env info --path)/bin/activate && fastapi dev src/main.py
-        - lazydocker
-        - bashtop
+        # - source $(poetry env info --path)/bin/activate && nvim
+        - source $(poetry env info --path)/bin/activate
+  # - db-manager:
+  #     panes:
+  #       - nvim -c "Dbee open"
+  # - api:
+  #     panes:
+  #       - atac
+  # - logs:
+  #     layout: tiled
+  #     panes:
+  #       - source $(poetry env info --path)/bin/activate && fastapi dev src/main.py
+  #       - lazydocker
+  #       - bashtop
