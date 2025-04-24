@@ -71,6 +71,15 @@ def install-packages [] {
   bash -c "nvm install 22"
   bash -c "corepack enable pnpm"
   bash -c "corepack enable yarn"
+
+  # --- Instalar Nix determinate ---
+  bash -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate"
+
+  cargo install --locked dysk
+
+  # --- Instalar JJ ---
+  # cargo install --locked --bin jj jj-cli
+  pacman -S jujutsu
 }
 
 # === Configurar servicios ===
