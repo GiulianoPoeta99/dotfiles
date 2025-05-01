@@ -20,4 +20,4 @@
 
 ## Arreglar
 
-- [ ] refactorizar el replicar configuracion de aliases para nushell y bash
+- [X] refactorizar el replicar configuracion de aliases para nushell y bash
