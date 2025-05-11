@@ -5,6 +5,7 @@
 - [ ] hacer config de nushell
 - [ ] hacer config de carapace
 - [ ] comentar toda la config de fzf en zsh
+- [ ] hacer config de yazi
 
 ## Investigar
 
