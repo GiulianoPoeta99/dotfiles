@@ -18,6 +18,7 @@
 - [ ] hacer aliases de kubernetes
 - [ ] hacer aliases de nix-env
 - [ ] hacer aliases de limactl
+- [ ] hacer aliases de fzf [video](https://www.youtube.com/watch?v=MvLQor1Ck3M)
 
 ## Arreglar
 
