@@ -19,6 +19,7 @@
 - [ ] hacer aliases de nix-env
 - [ ] hacer aliases de limactl
 - [ ] hacer aliases de fzf [video](https://www.youtube.com/watch?v=MvLQor1Ck3M)
+- [ ] ver como hacer para crear una iso de arch personalizada
 
 ## Arreglar
 
