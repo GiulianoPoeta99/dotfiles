@@ -64,6 +64,9 @@ def install-packages [] {
   bash -c "source ~/.cargo/env"
   bash -c "rustup update"
 
+  # --- Instalar paquetes cargo ---
+  cargo install --locked dysk
+
   # --- Instalar Node.js y herramientas ---
   print "Instalando Node.js con NVM y Corepack..."
   bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash"
@@ -75,11 +78,30 @@ def install-packages [] {
   # --- Instalar Nix determinate ---
   bash -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate"
 
-  cargo install --locked dysk
+  # --- Instalar homebrew ---
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # --- Instalar paquetes de brew ---
+  # go install github.com/yassinebenaid/bunster/cmd/bunster@latest
+  brew install bunster
+
+  # --- Instalar Lima ---
+  brew install lima
 
   # --- Instalar JJ ---
   # cargo install --locked --bin jj jj-cli
   pacman -S jujutsu
+
+  # --- Instalar carapace ---
+  paru -S carapace
+
+  # --- Instalar cosas de textual ---
+  pipx install posting
+  # pipx install dolphie
+  brew install dolphie
+  # pipx install harlequin
+  brew install harlequin
+
 }
 
 # === Configurar servicios ===
