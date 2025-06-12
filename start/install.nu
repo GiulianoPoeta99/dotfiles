@@ -42,7 +42,7 @@ def install-packages [] {
   # --- Instalar apps ---
   print "Instalando aplicaciones..."
   sudo pacman -S --noconfirm discord spotify-launcher
-  paru -S --noconfirm brave-bin zen-browser-bin visual-studio-code-bin cursor-bin
+  paru -S --noconfirm brave-bin zen-browser-bin visual-studio-code-bin cursor-bin windsurf
 
   # --- Instalar entorno de escritorio ---
   print "Instalando entorno de escritorio..."
